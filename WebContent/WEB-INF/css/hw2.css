@@ -1,0 +1,32 @@
+ul
+{
+   list-style-type: none;
+}
+
+label 
+{
+   float: left;
+   width: 8em;
+   align: left;
+}
+
+input 
+{
+   width: 15em;
+   margin-left: 1em;
+   margin-bottom: .5em;
+}
+
+hr {
+	color: blue;
+}
+
+#stickyfooter {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 12px;
+    height: 100px;
+    width: 100%;
+    color: blue;
+}
