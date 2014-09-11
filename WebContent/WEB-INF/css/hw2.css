@@ -17,16 +17,60 @@ input
    margin-bottom: .5em;
 }
 
-hr {
+hr 
+{
 	color: blue;
 }
 
-#stickyfooter {
+fieldset 
+{
+   align: right;
+}
+
+textarea 
+{
+   height: 5em;
+   width: 25em;
+   font-family: Arial, Helvetica, sans-serif; 
+}
+
+/**
+ Extra spacing for the computer configuration field set elements.
+**/
+#cconfig label,input
+{
+	width: 12em;	
+}
+
+#cconfig select
+{
+	width: 7em;
+	align: left;
+}
+
+/**
+ Make sure that the additional options disregards floats so that it appears at the bottom.
+**/
+#additionaloptions
+{
+	clear:both;
+}
+
+#additionaloptions input {
+    position:relative;
+    float:left;
+}
+
+/**
+ Forces the footer to anchor onto the bottom of the page.
+**/
+#stickyfooter 
+{
     position: absolute;
     left: 0;
     bottom: 0;
     font-size: 12px;
-    height: 100px;
+    height: 50px;
     width: 100%;
     color: blue;
 }

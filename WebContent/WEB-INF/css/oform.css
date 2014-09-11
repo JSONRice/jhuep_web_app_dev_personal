@@ -16,7 +16,7 @@
 
 form                 {margin: 0px}
 
-fieldset             {width: 350px; padding: 5px; margin: 0px 10px 10px 0px; float: left}
+fieldset             {width: 375px; height: 235px; padding: 5px; margin: 0px 10px 10px 0px; float: left}
 
 .blockLab            {position: relative; font-size: 14px; display: block; margin: 10px 0px}
 
