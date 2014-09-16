@@ -25,7 +25,15 @@ public class CreditCardValidator {
 
 	/** Return this number if it is a single digit, otherwise, return the sum of the two digits */
 	public static int getDigit(int number){
-		return number;
+		int size = getSize(number);
+		if (size <= 0){
+			return 0;
+		}
+		else if (size > 2) {
+			// truncate number to first two digit numeral
+			number = Integer.parseInt(Integer.toString(number).substring(0,2));
+		}
+        return ((number % 9) == 0) ? 9 : number % 9;
 	}
 
 	/** Return sum of odd place digits in number */
@@ -44,7 +52,7 @@ public class CreditCardValidator {
 		return (int) ((d*Long.SIZE) / Byte.SIZE);	
 	}
 
-	/** Return the first k number of digits from number. If the
+	/** Return the first k (prefix) number of digits from number. If the
 	* number of digits in number is less than k, return number. */
 	public static long getPrefix(long number, int k){
 		// perform safety checks first
@@ -87,14 +95,13 @@ public class CreditCardValidator {
 			// If all conditions pass continue:
 			System.out.print("The cc number: '" + input + "' is ");
 			if (isValid(number)){
-				System.out.println("valid.");
+				System.out.println("valid.\n");
 			}
 			else{
-				System.out.println("invalid.");
+				System.out.println("invalid.\n");
 			}
-			driver(input = "", number = 0L, br);
-
-		}		
+		}	
+		driver(input = "", number = 0L, br);
 	}
 
 	/**
