@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main;
 
 import java.io.BufferedReader;
@@ -13,43 +10,66 @@ import java.io.InputStreamReader;
  */
 public class CreditCardValidator {
 	
+	private static final int[] VALID_CC = {4 /* visa */, 5 /*master*/, 37 /*discover*/, 6 /*american*/};
+	
 	/** Return true if the card number is valid */
 	public static boolean isValid(long number){
-		return false;
-	}
-
-	/** Get the result from Step 2 */
-	public static int sumOfDoubleEvenPlace(long number){
-		return 0;
+       long finalSum = 0;
+  	   // PRE-CONDITIONS: At this point it's safe to assume we received a 13-16 digit numeric value from the user.
+       for (int encoding : VALID_CC){
+          if (prefixMatched(number, encoding)){
+    	      finalSum = sumOfDoubleEvenPlace(number) + sumOfOddPlace(number);				         	  
+     		  return ((finalSum % 10) == 0) ? true : false; // Luhn's mod 10 check
+          }
+       }
+       return false; // -- default
 	}
 
 	/** Return this number if it is a single digit, otherwise, return the sum of the two digits */
 	public static int getDigit(int number){
-		int size = getSize(number);
-		if (size <= 0){
+		if (number < 0){
 			return 0;
 		}
-		else if (size > 2) {
-			// truncate number to first two digit numeral
-			number = Integer.parseInt(Integer.toString(number).substring(0,2));
-		}
-        return ((number % 9) == 0) ? 9 : number % 9;
+		return (number < 10) ? number : ((number / 10) + (number % 10));
 	}
 
+	/** Get the result from Step 2 */
+	public static int sumOfDoubleEvenPlace(long number) {
+		int sum = 0;
+		for (int i = 1; i <= 16; i++) {
+			if (i % 2 == 0) /* only factor in even place digits */ {
+				sum += getDigit((int) (number % 10) * 2); // the mod 10 enforces the range
+			}
+			number /= 10;
+		}
+		return sum;
+	}
+
+	
 	/** Return sum of odd place digits in number */
 	public static int sumOfOddPlace(long number){
-		return 0;
+		int sum = 0;
+	    for (int i = 1; i <= 16; i++) {
+	       if (i % 2 == 1){ /* only factor in even place digits */
+	          sum += (int)(number % 10);
+	       }
+	       number /= 10;
+	    }
+	    return sum;
 	}
 
 	/** Return true if the digit d is a prefix for number */
 	public static boolean prefixMatched(long number, int d){
-		return false;
+		return (d == getPrefix(number,(getSize(d)))) ? true : false;
 	}
 
 
 	/** Return the number of digits in d */
 	public static int getSize(long d){
-		return (int) ((d*Long.SIZE) / Byte.SIZE);	
+		if (d < 0){ // safety
+			d = 0;
+		}
+		return (d == 0) ? 1 : (int) (Math.log10(d)+1);
 	}
 
 	/** Return the first k (prefix) number of digits from number. If the
@@ -59,18 +79,13 @@ public class CreditCardValidator {
 		if (k < 0){ 
 			k = 0;
 		}
-		else if (number < 0){
-			number = 0;
-		}
-		
-		// safety --
-		if (number <= 0){
+		else if (number <= 0){
 			return 0;
 		}
 		
 		/***
-		 * The following grabs the first k letters from a string and return the substring set.
-		 * A Long is returned but then downcast to a long primitive.
+		  The following grabs the first k letters from a string and return the substring set.
+		  A Long is returned but then downcast to a long primitive.
 		 ***/
 		return Long.valueOf(String.valueOf(number).substring(0, k));
 	}
@@ -85,7 +100,7 @@ public class CreditCardValidator {
 		}		
 		else if (input.toLowerCase().equals("q")){
 			System.out.println("bye");
-			return; // base case - pre-empt
+			return;
 		}
 		else if (input.length() < 13 || input.length() > 16) {
 			System.out.println("Invalid input entered: '" + input + "'");
