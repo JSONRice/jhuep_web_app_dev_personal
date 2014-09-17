@@ -62,6 +62,12 @@ public class CreditCardValidator {
 		else if (number < 0){
 			number = 0;
 		}
+		
+		// safety --
+		if (number <= 0){
+			return 0;
+		}
+		
 		/***
 		 * The following grabs the first k letters from a string and return the substring set.
 		 * A Long is returned but then downcast to a long primitive.
@@ -93,7 +99,7 @@ public class CreditCardValidator {
 				driver(input = "", number = 0L, br);
 			}
 			// If all conditions pass continue:
-			System.out.print("The cc number: '" + input + "' is ");
+			System.out.print("The cc number: '" + number + "' is ");
 			if (isValid(number)){
 				System.out.println("valid.\n");
 			}
