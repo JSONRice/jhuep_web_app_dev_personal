@@ -50,7 +50,7 @@ public class CreditCardValidator {
 	public static int sumOfOddPlace(long number){
 		int sum = 0;
 	    for (int i = 1; i <= 16; i++) {
-	       if (i % 2 == 1){ /* only factor in even place digits */
+	       if (i % 2 == 1){ /* only factor in odd place digits */
 	          sum += (int)(number % 10);
 	       }
 	       number /= 10;
