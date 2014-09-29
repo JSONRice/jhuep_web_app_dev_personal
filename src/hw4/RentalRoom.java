@@ -5,7 +5,7 @@ import java.util.Random;
 public class RentalRoom {
 	
 	private Room  room;
-	private Suite suite;
+	// private Suite suite;
 	private boolean suiteUpgrade; // indicates whether the room is a regular room or a suite upgrade
 	private int numNights;
 	private final int ROOM_THRESHOLD = 199;
@@ -28,16 +28,11 @@ public class RentalRoom {
 			roomNumber = getRand(ROOM_THRESHOLD,ROOM_NUM_MAX);			
 		}
 		
-		if (suiteUpgrade){
-			suite = new Suite(roomNumber);
-		}
-		else {
-			room = new Room(roomNumber);
-		}		
+		room = (this.suiteUpgrade) ? new Suite(roomNumber) : new Room(roomNumber);		
 	}
 	
 	public final int getRoomNumber(){
-		return (suiteUpgrade) ? suite.getNumber() : room.getNumber();
+		return room.getNumber();
 	}
 	
 	public final int getRand(int min, int max){ // called once during object construction
@@ -45,10 +40,10 @@ public class RentalRoom {
 	}
 	
 	public Double getTotal(){
-		return numNights * ((suiteUpgrade) ? suite.getRate() : room.getRate());
+		return numNights * room.getRate();
 	}
 	
 	public Double getRate(){
-		return (suiteUpgrade) ? suite.getRate() : room.getRate();
+		return room.getRate();
 	}
 }

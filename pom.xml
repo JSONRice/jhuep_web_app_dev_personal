@@ -29,7 +29,7 @@
     <outputDirectory>target/classes</outputDirectory>
     <finalName>${artifactId}-${version}</finalName>
     <testOutputDirectory>target/test-classes</testOutputDirectory>
-    <sourceDirectory>src/main</sourceDirectory>
+    <sourceDirectory>src/</sourceDirectory>
 <!--
     <scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
 -->
@@ -55,8 +55,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <!-- Main Java class get's placed into MANIFEST. -->
-              <mainClass>main.CreditCardValidator</mainClass>
+              <mainClass>hw4.Driver</mainClass>
             </manifest>
           </archive>
         </configuration>
