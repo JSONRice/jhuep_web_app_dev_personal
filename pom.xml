@@ -18,18 +18,17 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.8.1</version>
+      <version>4.11</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
-
 
   <build>
     <directory>target</directory>
     <outputDirectory>target/classes</outputDirectory>
     <finalName>${artifactId}-${version}</finalName>
     <testOutputDirectory>target/test-classes</testOutputDirectory>
-    <sourceDirectory>src/</sourceDirectory>
+    <sourceDirectory>src/main</sourceDirectory>
 <!--
     <scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
 -->
@@ -55,7 +54,9 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>hw4.Driver</mainClass>
+	      <mainClass>main.Driver</mainClass>
+              <mainClass>main.hw4_part1.Driver</mainClass>
+	      <mainClass>main.hw4_part2.Driver</mainClass>-->
             </manifest>
           </archive>
         </configuration>
