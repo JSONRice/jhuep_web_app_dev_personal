@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="528.0" style="-fx-background-color: #C0C0C0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hw6.main.WebBuyer">
+   <children>
+      <FlowPane layoutX="41.0" layoutY="57.0" prefHeight="87.0" prefWidth="466.0">
+         <children>
+            <TextArea prefHeight="77.0" prefWidth="61.0" />
+            <VBox prefHeight="73.0" prefWidth="74.0" spacing="7.0">
+               <children>
+                  <CheckBox fx:id="cbImage" mnemonicParsing="false" text="Image" />
+                  <CheckBox fx:id="cbText"  mnemonicParsing="false" text="Text" />
+                  <CheckBox fx:id="cbCode"  mnemonicParsing="false" text="Code" />
+               </children>
+            </VBox>
+            <TextArea prefHeight="77.0" prefWidth="39.0" />
+            <VBox prefHeight="26.0" prefWidth="87.0" spacing="7.0">
+               <children>
+                  <RadioButton fx:id="rbtSelection" mnemonicParsing="false" text="Selection" />
+                  <RadioButton fx:id="rbtAll" mnemonicParsing="false" selected="true" text="All" />
+                  <RadioButton fx:id="rbtApplet" mnemonicParsing="false" text="Applet" />
+               </children>
+            </VBox>
+            <TextArea prefHeight="77.0" prefWidth="57.0" />
+         </children>
+      </FlowPane>
+      <Text layoutX="41.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Printer: MyPrinter" />
+      <HBox layoutX="46.0" layoutY="139.0" prefHeight="25.0" prefWidth="334.0" spacing="30.0" style="-fx-alignment: CENTER_LEFT;">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Print Quality:">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Text>
+            <MenuButton fx:id="mbHigh" mnemonicParsing="false" text="High">
+              <items>
+                <MenuItem fx:id="miMedium" mnemonicParsing="false" text="Medium" />
+                <MenuItem fx:id="miLow" mnemonicParsing="false" text="Low" />
+              </items>
+            </MenuButton>
+            <CheckBox fx:id="cbPrint" mnemonicParsing="false" text="Print to File" />
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" layoutX="426.0" layoutY="23.0" prefHeight="129.0" prefWidth="100.0" spacing="18.0">
+         <children>
+            <Button fx:id="btOK" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" style="-fx-max-width: 80;" text="OK" />
+            <Button fx:id="btCancel" mnemonicParsing="false" style="-fx-max-width: 80;" text="Cancel" />
+            <Button fx:id="btSetup" mnemonicParsing="false" style="-fx-max-width: 80;" text="Setup..." />
+            <Button fx:id="btHelp" mnemonicParsing="false" style="-fx-max-width: 80;" text="Help" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
