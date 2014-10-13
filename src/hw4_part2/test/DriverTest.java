@@ -9,7 +9,6 @@ import org.junit.Test;
 
 
 public class DriverTest extends TestCase {
-
     /**********************************************
      * Base Shipping Rates:\n"
      * Weights (lbs)    Air    Truck   Mail\n"
