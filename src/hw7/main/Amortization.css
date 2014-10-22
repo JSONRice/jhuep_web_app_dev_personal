@@ -1,0 +1,18 @@
+#totalpayment {
+   float: right;
+}
+
+/* Rounded corners for modern look and feel for tables, buttons, and output text field. */
+/* top-left, top-right, bottom-right, and bottom-left corners, in that order. */
+#inputs,#amortization,#calculate {
+  -fx-border-radius: 10 10 10 10;
+  -fx-background-radius: 10 10 10 10;
+}
+
+.column-odd {
+  -fx-background-color: #CCFFCC;
+}
+
+.column-even {
+  -fx-background-color: #CCFFFF;
+}
