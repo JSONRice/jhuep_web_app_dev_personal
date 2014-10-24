@@ -29,20 +29,10 @@
                         <Insets left="20.0" top="5.0" />
                      </HBox.margin>
                   </Text>
-<!--                   <MenuButton fx:id="interest" mnemonicParsing="false" text="3.25">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="3.50" />
-                      <MenuItem mnemonicParsing="false" text="3.75" />
-                        <MenuItem mnemonicParsing="false" text="4.00" />
-                        <MenuItem mnemonicParsing="false" text="4.25" />
-                        <MenuItem mnemonicParsing="false" text="4.50" />
-                        <MenuItem mnemonicParsing="false" text="4.75" />
-                        <MenuItem mnemonicParsing="false" text="5.00" />
-                    </items>
-                  </MenuButton> -->
-                  <ChoiceBox fx:id="interest" value="3.50">
+                  <ChoiceBox fx:id="interest">
                     <items>
                       <FXCollections fx:factory="observableArrayList">
+                        <Float fx:value="3.25" />
                         <Float fx:value="3.50" />
                         <Float fx:value="3.75" />
                         <Float fx:value="4.00" />
@@ -58,13 +48,19 @@
                         <Insets left="20.0" top="5.0" />
                      </HBox.margin>
                   </Text>
-                  <MenuButton mnemonicParsing="false" text="30">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="15" />
-                        <MenuItem mnemonicParsing="false" text="10" />
-                        <MenuItem mnemonicParsing="false" text="5" />
-                     </items>
-                  </MenuButton>
+                  <ChoiceBox fx:id="years">
+                    <items>
+                      <FXCollections fx:factory="observableArrayList">
+                        <Integer fx:value="30"/>
+                        <Integer fx:value="15"/>
+                        <Integer fx:value="10"/>
+                        <Integer fx:value="5"/>
+                      </FXCollections>
+                    </items>
+                    <value>
+                      <String fx:value="30" />
+                    </value>
+                  </ChoiceBox>
                </children>
                <padding>
                   <Insets left="40.0" top="15.0" />
@@ -78,7 +74,7 @@
                         <Insets top="5.0" />
                      </HBox.margin>
                   </Text>
-                  <TextField id="totalpaymentoutput" editable="false" style="-fx-border-color: black; -fx-background-color: #E0E0E0;">
+                  <TextField fx:id="totalpaymentoutput" editable="false" style="-fx-border-color: black; -fx-background-color: #E0E0E0;">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -92,10 +88,10 @@
               <columns>
                 <TableColumn prefWidth="131.0" styleClass="column-odd" text="Month Number" />
                 <TableColumn prefWidth="78.0" styleClass="column-even" text="Payment" />
-                  <TableColumn prefWidth="116.0" styleClass="column-odd" text="Principle Paid" />
-                  <TableColumn prefWidth="111.0" styleClass="column-even" text="Interest Paid" />
-                  <TableColumn prefWidth="150.0" styleClass="column-odd" text="Total Interest Paid" />
-                  <TableColumn prefWidth="158.0" styleClass="column-even" text="Remaining Balance" />
+                <TableColumn prefWidth="116.0" styleClass="column-odd" text="Principle Paid" />
+                <TableColumn prefWidth="111.0" styleClass="column-even" text="Interest Paid" />
+                <TableColumn prefWidth="150.0" styleClass="column-odd" text="Total Interest Paid" />
+                <TableColumn prefWidth="158.0" styleClass="column-even" text="Remaining Balance" />
               </columns>
             </TableView>
          </children>
