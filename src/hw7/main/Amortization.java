@@ -34,7 +34,8 @@ import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-public class Amortization extends Application implements Initializable, AmortizationAlgorithm {
+public class Amortization extends Application implements Initializable, 
+	AmortizationAlgorithm {
 		
 	private DecimalFormat fmt;
 	
@@ -59,7 +60,7 @@ public class Amortization extends Application implements Initializable, Amortiza
 
 	@FXML
 	private TableView<AmortizationTuple> amortization;
-
+	
 	@FXML
 	private TextField totalpaymentoutput;
 	private String amortValue;
@@ -98,22 +99,72 @@ public class Amortization extends Application implements Initializable, Amortiza
 	 * These object instances are utilized when the amortization gets calculated and hence
 	 * the table must be updated to reflect the amortization calculations.
 	 */
-	private class AmortizationTuple{
-        private  SimpleStringProperty monthNum;
-        private  SimpleStringProperty monthlyPayment;
-        private  SimpleStringProperty principlePaid;
-        private  SimpleStringProperty interestPaid;
-        private  SimpleStringProperty totalInterestPaid;
-        private  SimpleStringProperty remainingBalance;
+	public class AmortizationTuple{
+		private  final SimpleStringProperty monthNum = new SimpleStringProperty("");
+        private  final SimpleStringProperty payment = new SimpleStringProperty(""); // monthly payment
+        private  final SimpleStringProperty princPaid = new SimpleStringProperty("");
+        private  final SimpleStringProperty intPaid = new SimpleStringProperty("");
+        private  final SimpleStringProperty totIntPaid = new SimpleStringProperty("");
+        private  final SimpleStringProperty remBal = new SimpleStringProperty("");
  
-        private AmortizationTuple(String monthNum, String monthlyPayment, 
-        		String principlePaid, String interestPaid, 
-        		String totalInterestPaid, String remainingBalance) {
-            this.monthNum = new SimpleStringProperty(monthNum);
-            this.monthlyPayment  = new SimpleStringProperty(monthlyPayment);
-            this.principlePaid = new SimpleStringProperty(principlePaid);
+        private AmortizationTuple(String monthNum, String payment, 
+        		String princPaid, String intPaid, 
+        		String totIntPaid, String remBal) {
+        	setMonthNum(monthNum);
+        	setPayment(payment);
+        	setPrincPaid(princPaid);
+        	setIntPaid(intPaid);
+        	setTotIntPaid(totIntPaid);
+        	setRemBal(remBal);
         }
+        
+        public String getMonthNum() {
+ 			return monthNum.get();
+ 		}
 
+ 		public void setMonthNum(String monthNum) {
+ 			this.monthNum.set(monthNum);
+ 		}
+
+ 		public String getPayment() {
+ 			return payment.get();
+ 		}
+
+ 		public void setPayment(String payment) {
+ 			this.payment.set(payment);
+ 		}
+
+ 		public String getPrincPaid() {
+ 			return princPaid.get();
+ 		}
+
+ 		public void setPrincPaid(String princPaid) {
+ 			this.princPaid.set(princPaid);
+ 		}
+
+ 		public String getIntPaid() {
+ 			return intPaid.get();
+ 		}
+
+ 		public void setIntPaid(String intPaid) {
+ 			this.intPaid.set(intPaid);
+ 		}
+
+ 		public String getTotalInterestPaid() {
+ 			return totIntPaid.get();
+ 		}
+
+ 		public void setTotIntPaid(String totIntPaid) {
+ 			this.totIntPaid.set(totIntPaid);
+ 		}
+
+ 		public String getRemBal() {
+ 			return remBal.get();
+ 		}
+
+ 		public void setRemBal(String remBal) {
+ 			this.remBal.set(remBal);
+ 		}
 	}
 	
 	public final String updateAmortizationTable(Integer years){
@@ -159,13 +210,20 @@ public class Amortization extends Application implements Initializable, Amortiza
         
         totalPayment += totalInterestPaid;
         
+        
+        ObservableList<AmortizationTuple> data = amortization.getItems();
+
+        for (AmortizationTuple at : amortizationRows) {
+        	data.add(at);
+        }
+        
         // Add the new tuples (rows) to the table list.
-        ObservableList<AmortizationTuple> amortizationdata = FXCollections.observableArrayList(amortizationRows);
+        // ObservableList<AmortizationTuple> amortizationdata = FXCollections.observableArrayList(amortizationRows);
 
         
         //amortization.getItems().setAll(amortizationRows);
         // Add the final table list to the amortization table.
-        amortization.setItems(amortizationdata);
+        // amortization.setItems(amortizationdata);
         
         return "$" + roundOffTenths(totalPayment);
 	}
@@ -300,7 +358,7 @@ public class Amortization extends Application implements Initializable, Amortiza
 		assert amortization       != null : "fx:id=\"amortization\" was not injected: check your FXML file.";
 		assert calculate          != null : "fx:id=\"calculate\" was not injected: check your FXML file.";
 		assert totalpaymentoutput != null : "fx:id=\"totalpaymentoutput\" was not injected: check your FXML file.";
-		
+
 		setEvents();
 		
 		fmt = new DecimalFormat("0.0'0'");
