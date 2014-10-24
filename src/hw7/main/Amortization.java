@@ -170,9 +170,8 @@ public class Amortization extends Application implements Initializable,
 	public final String updateAmortizationTable(Integer years){
         amortization.setEditable(true);
         
-        // TODO: Truncate any previous data.
-        // ArrayList items =  new ArrayList (amortization.getSelectionModel().getSelectedItems());  
-        // amortization.getSelectionModel().clearSelection();
+        ObservableList<AmortizationTuple> data = amortization.getItems();
+        data.removeAll(data);
         
         ArrayList<AmortizationTuple> amortizationRows = new ArrayList<AmortizationTuple>();
         
@@ -194,10 +193,10 @@ public class Amortization extends Application implements Initializable,
         	principle = newBalance; // remaining balance        	
 
         	// TODO: make sure this populates within the table and has the right formatting
-        	amortizationRows.add(new AmortizationTuple("Month " + i, 
-        			roundOffTenths(monthlyPayment), roundOffTenths(principlePaid), 
-        			roundOffTenths(interestPaid), roundOffTenths(totalInterestPaid), 
-        			roundOffTenths(principle)));
+        	amortizationRows.add(new AmortizationTuple("" + i, 
+        			"$" + roundOffTenths(monthlyPayment), "$" + roundOffTenths(principlePaid), 
+        			"$" + roundOffTenths(interestPaid), "$" + roundOffTenths(totalInterestPaid), 
+        			"$" + roundOffTenths(principle)));
         	
         	// TODO: remove logs belows
         	System.out.println("Month " + i + "," +
@@ -209,22 +208,13 @@ public class Amortization extends Application implements Initializable,
         }
         
         totalPayment += totalInterestPaid;
-        
-        
-        ObservableList<AmortizationTuple> data = amortization.getItems();
+
+        data = amortization.getItems();
 
         for (AmortizationTuple at : amortizationRows) {
         	data.add(at);
         }
-        
-        // Add the new tuples (rows) to the table list.
-        // ObservableList<AmortizationTuple> amortizationdata = FXCollections.observableArrayList(amortizationRows);
 
-        
-        //amortization.getItems().setAll(amortizationRows);
-        // Add the final table list to the amortization table.
-        // amortization.setItems(amortizationdata);
-        
         return "$" + roundOffTenths(totalPayment);
 	}
 	
