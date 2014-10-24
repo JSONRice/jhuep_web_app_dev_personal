@@ -11,7 +11,7 @@
 <?import javafx.collections.*?> 
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
 	prefWidth="784.0" style="-fx-background-color: #E0E0E0;" xmlns="http://javafx.com/javafx/8"
 	xmlns:fx="http://javafx.com/fxml/1" fx:controller="hw7.main.Amortization">
 	<children>
@@ -102,7 +102,7 @@
 						<Insets left="200.0" />
 					</VBox.margin>
 				</HBox>
-				<TableView fx:id="amortization" prefHeight="200.0" prefWidth="200.0">
+				<TableView fx:id="amortization" prefHeight="300.0" prefWidth="200.0">
 					<columns>
 						<TableColumn prefWidth="131.0" text="Month Number">
 							<cellValueFactory>
