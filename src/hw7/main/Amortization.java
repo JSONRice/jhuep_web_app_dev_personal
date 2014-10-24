@@ -9,11 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,12 +20,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -36,9 +31,7 @@ import javafx.fxml.Initializable;
 
 public class Amortization extends Application implements Initializable, 
 	AmortizationAlgorithm {
-		
-	private DecimalFormat fmt;
-	
+			
 	private boolean validInput;
 
 	@FXML
@@ -150,7 +143,7 @@ public class Amortization extends Application implements Initializable,
  			this.intPaid.set(intPaid);
  		}
 
- 		public String getTotalInterestPaid() {
+ 		public String getTotIntPaid() {
  			return totIntPaid.get();
  		}
 
@@ -184,6 +177,7 @@ public class Amortization extends Application implements Initializable,
         Double totalInterestPaid = 0D;
         Double totalPayment = 0D;
         
+        // amortize algorithm:
         for (int i = 1;i < (months + 1); i++){
         	
         	interestPaid =  principle * monthlyInterestRate;
@@ -192,17 +186,10 @@ public class Amortization extends Application implements Initializable,
         	newBalance = principle - principlePaid; // set new balance
         	principle = newBalance; // remaining balance        	
 
-        	// TODO: make sure this populates within the table and has the right formatting
         	amortizationRows.add(new AmortizationTuple("" + i, 
         			"$" + roundOffTenths(monthlyPayment), "$" + roundOffTenths(principlePaid), 
         			"$" + roundOffTenths(interestPaid), "$" + roundOffTenths(totalInterestPaid), 
         			"$" + roundOffTenths(principle)));
-        	
-        	// TODO: remove logs belows
-        	System.out.println("Month " + i + "," +
-        			roundOffTenths(monthlyPayment) + "," + roundOffTenths(principlePaid) + "," +  
-        			roundOffTenths(interestPaid) + "," +  roundOffTenths(totalInterestPaid) + "," + 
-        			roundOffTenths(principle));
         	
         	totalPayment += principlePaid;
         }
@@ -219,6 +206,9 @@ public class Amortization extends Application implements Initializable,
 	}
 	
 	public String roundOffTenths(Double d){
+		if (d <= 0) {
+			return "0.00";
+		}
 		Double value = (double) (((int) ((d * 100.0) + 0.5)) / 100.0);
 		return String.format("%.2f", value );
 	}
@@ -351,7 +341,6 @@ public class Amortization extends Application implements Initializable,
 
 		setEvents();
 		
-		fmt = new DecimalFormat("0.0'0'");
 		errormsg = new Text();
 		interestOptions = interest.getItems();
 		yearsOptions = years.getItems();
