@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections ?>
+<?import fxmltableview.*?> 
+<?import javafx.scene.control.cell.*?> 
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="hw8.main.Retail">
+	<children>
+		<MenuBar prefHeight="29.0" prefWidth="600.0">
+			<menus>
+				<Menu mnemonicParsing="false" text="File">
+					<items>
+						<MenuItem fx:id="miexit" mnemonicParsing="false" text="Exit" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Data">
+					<items>
+						<Menu mnemonicParsing="false" text="Customer">
+							<items>
+								<MenuItem fx:id="customerAddNew" mnemonicParsing="false"
+									text="Add New">
+									<graphic>
+										<ImageView fitHeight="15.0" fitWidth="15.0"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@add-icon.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</MenuItem>
+								<MenuItem fx:id="customerListAll" mnemonicParsing="false"
+									text="List All">
+									<graphic>
+										<ImageView fitHeight="15.0" fitWidth="15.0"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@list-icon.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</MenuItem>
+							</items>
+							<graphic>
+								<ImageView fitHeight="15.0" fitWidth="15.0"
+									pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@customer-icon.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Employee">
+							<items>
+								<MenuItem fx:id="employeeAddNew" mnemonicParsing="false"
+									text="Add New">
+									<graphic>
+										<ImageView fitHeight="15.0" fitWidth="15.0"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@add-icon.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</MenuItem>
+								<MenuItem fx:id="employeeListAll" mnemonicParsing="false"
+									text="List All">
+									<graphic>
+										<ImageView fitHeight="15.0" fitWidth="15.0"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@list-icon.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</MenuItem>
+							</items>
+							<graphic>
+								<ImageView fitHeight="15.0" fitWidth="15.0"
+									pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@employee-icon.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Merchandise">
+							<items>
+								<MenuItem fx:id="merchandiseAddNew" mnemonicParsing="false"
+									text="Add New">
+									<graphic>
+										<ImageView fitHeight="15.0" fitWidth="15.0"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@add-icon.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</MenuItem>
+								<MenuItem fx:id="merchandiseListAll" mnemonicParsing="false"
+									text="List All">
+									<graphic>
+										<ImageView fitHeight="15.0" fitWidth="15.0"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@list-icon.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</MenuItem>
+							</items>
+							<graphic>
+								<ImageView fitHeight="15.0" fitWidth="15.0"
+									pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@cart-icon.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</Menu>
+					</items>
+				</Menu>
+			</menus>
+		</MenuBar>
+		<TableView fx:id="retailtable" layoutY="29.0" prefHeight="369.0" prefWidth="525.0">
+			<columns>
+				<TableColumn fx:id="tcCol0" prefWidth="75.0">
+					<cellValueFactory>
+						<PropertyValueFactory property="col0" />
+					</cellValueFactory>
+				</TableColumn>
+				<TableColumn fx:id="tcCol1" prefWidth="75.0">
+					<cellValueFactory>
+						<PropertyValueFactory property="col1" />
+					</cellValueFactory>
+				</TableColumn>
+				<TableColumn fx:id="tcCol2" prefWidth="75.0">
+					<cellValueFactory>
+						<PropertyValueFactory property="col2" />
+					</cellValueFactory>
+				</TableColumn>
+				<TableColumn fx:id="tcCol3" prefWidth="75.0">
+					<cellValueFactory>
+						<PropertyValueFactory property="col3" />
+					</cellValueFactory>
+				</TableColumn>
+				<TableColumn fx:id="tcCol4" prefWidth="75.0">
+					<cellValueFactory>
+						<PropertyValueFactory property="col4" />
+					</cellValueFactory>
+				</TableColumn>
+				<TableColumn fx:id="tcCol5" prefWidth="75.0">
+					<cellValueFactory>
+						<PropertyValueFactory property="col5" />
+					</cellValueFactory>
+				</TableColumn>
+				<TableColumn fx:id="tcCol6" prefWidth="75.0">
+					<cellValueFactory>
+						<PropertyValueFactory property="col6" />
+					</cellValueFactory>
+				</TableColumn>
+			</columns>
+			<items>
+				<FXCollections fx:id="retailtuples" 
+				   fx:factory="observableArrayList">
+				</FXCollections>
+			</items>
+		</TableView>
+	</children>
+</AnchorPane>
