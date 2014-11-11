@@ -3,7 +3,7 @@
 ----------------------
 CREATE TABLE MERCHANDISE(
    name VARCHAR(25),
-   price DECIMAL (20,2),
+   price DECIMAL (20,2), -- dollars and cents
    description VARCHAR(200)
 );
 
@@ -17,7 +17,7 @@ CREATE TABLE EMPLOYEE(
    city VARCHAR(25),
    state VARCHAR(25),
    zipcode VARCHAR(25), -- string type if hyphens are present
-   gender VARCHAR(6)
+   gender VARCHAR(6) -- 'male' or 'female'
 );
 
 ----------------------
@@ -29,6 +29,6 @@ CREATE TABLE CUSTOMER(
    address VARCHAR(50),
    city VARCHAR(25),
    state VARCHAR(25),
-   zipcode INTEGER,
-   gender VARCHAR(6)
+   zipcode INTEGER, -- string type if hyphens are present
+   gender VARCHAR(6) -- 'male' or 'female'
 );
