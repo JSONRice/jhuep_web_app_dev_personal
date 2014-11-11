@@ -1,0 +1,34 @@
+----------------------
+-- MERCHANDISE TABLE
+----------------------
+CREATE TABLE MERCHANDISE(
+   name VARCHAR(25),
+   price DECIMAL (20,2),
+   description VARCHAR(200)
+);
+
+----------------------
+-- EMPLOYEE TABLE
+----------------------
+CREATE TABLE EMPLOYEE(
+   fname VARCHAR(25),
+   lname VARCHAR(25),
+   address VARCHAR(50),
+   city VARCHAR(25),
+   state VARCHAR(25),
+   zipcode VARCHAR(25), -- string type if hyphens are present
+   gender VARCHAR(6)
+);
+
+----------------------
+-- CUSTOMER TABLE
+----------------------
+CREATE TABLE CUSTOMER(
+   fname VARCHAR(25),
+   lname VARCHAR(25),
+   address VARCHAR(50),
+   city VARCHAR(25),
+   state VARCHAR(25),
+   zipcode INTEGER,
+   gender VARCHAR(6)
+);
