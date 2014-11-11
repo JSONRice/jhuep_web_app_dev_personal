@@ -1,3 +1,7 @@
+----
+-- Note: professor said primary keys are not necessary since these are simple tutorial tables.
+----
+
 ----------------------
 -- MERCHANDISE TABLE
 ----------------------
@@ -29,6 +33,6 @@ CREATE TABLE CUSTOMER(
    address VARCHAR(50),
    city VARCHAR(25),
    state VARCHAR(25),
-   zipcode INTEGER, -- string type if hyphens are present
+   zipcode VARCHAR(25), -- string type if hyphens are present
    gender VARCHAR(6) -- 'male' or 'female'
 );
