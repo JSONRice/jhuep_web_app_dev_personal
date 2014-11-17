@@ -1,4 +1,4 @@
-package hw9.main;
+package hw10.main;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -170,14 +170,39 @@ public class DerbyHandle {
 			return null;
 		}
 	}
+
+	/**
+	 * @desc insert tuple into MERCHANDISE table given values.
+	 * @param name
+	 * @param price
+	 * @param description
+	 * @return true if the transaction completes and is committed successfully, else false
+	 */
+	public boolean insertMerchandiseTuple(String name, Double price, String description){
+		try{
+			Statement statement = conn.createStatement();
+			String executeStr = "INSERT INTO MERCHANDISE VALUES ('" + name 
+					             + "'," + price + ",'" + description + "')";
+	   	    Logger.getLogger(Retail.class.getName()).log(Level.INFO,"Inserting tuples into MERCHANDISE: " + executeStr);
+			statement.executeUpdate(executeStr);
+	        conn.commit();			
+		} catch (SQLException e) {
+	   	    Logger.getLogger(Retail.class.getName()).log(Level.INFO,"ERROR: Database transaction failure:");
+			e.printStackTrace();
+			return false;
+		}
+   	    Logger.getLogger(Retail.class.getName()).log(Level.INFO,"INFO: Database transaction completed.");		
+		return true;
+	}
 	
 	/**
-	 * @desc insert tuples from table given a table name and values.
+	 * @desc insert tuples into person based table given a table name and values. Can either
+	 * be a EMPLOYEE or CUSTOMER.
 	 * @param name
 	 * @param values list of values to insert into a given record tuple.
 	 * @return true if the transaction completes and is committed successfully, else false
 	 */
-	public boolean insertTuples(String name, ArrayList<String> values){
+	public boolean insertPersonTuples(String name, ArrayList<String> values){
 		try {
 			Statement statement = conn.createStatement();
 			String executeStr = "INSERT INTO " + name + " VALUES (";
@@ -192,7 +217,7 @@ public class DerbyHandle {
 		    }
 		    // add on the ")" to close the statement
 		    executeStr += ")";
-	   	    Logger.getLogger(Retail.class.getName()).log(Level.INFO,"Inserting tuples: " + executeStr);
+	   	    Logger.getLogger(Retail.class.getName()).log(Level.INFO,"Inserting tuples into " + name + ":" + executeStr);
 			statement.executeUpdate(executeStr);
 	        conn.commit();
 		} catch (SQLException e) {

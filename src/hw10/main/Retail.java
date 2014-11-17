@@ -1,4 +1,4 @@
-package hw9.main;
+package hw10.main;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -286,9 +286,11 @@ public class Retail extends Application implements Initializable {
 						statesMenu.getSelectionModel().getSelectedItem(),
 						zipcode.getText(), genderStr);
 				if (isCustomer) {
-					derby.insertTuples("CUSTOMER", packTuple(rt, true));
+					derby.insertPersonTuples("CUSTOMER", packTuple(rt, true));
+					updateRetailTableSingleton(true, false, false, rt);
 				} else if (isEmployee) {
-					derby.insertTuples("EMPLOYEE", packTuple(rt, true));
+					derby.insertPersonTuples("EMPLOYEE", packTuple(rt, true));
+					updateRetailTableSingleton(false, true, false, rt);
 				}
 				newStage.close();
 			}
@@ -346,6 +348,57 @@ public class Retail extends Application implements Initializable {
 		return data;
 	}
 
+	/**
+	 * @desc Truncate and then insert a single row into the retail table. This is for the
+	 * 'Add New' menu item. After the user clicks OK then the data is immediately redrawn
+	 * into the retail table.
+	 * 
+	 * @param isCustomer
+	 *            Tuples (rows) to insert are customers.
+	 * @param isEmployee
+	 *            Tuples (rows) to insert are employees.
+	 * @param isMerchandise
+	 *            Tuples (rows) to insert are merchandise.
+	 */
+	public void updateRetailTableSingleton(boolean isCustomer, boolean isEmployee,
+			boolean isMerchandise, RetailTuple singleton) {
+		Logger.getLogger(Retail.class.getName()).log(Level.INFO,
+				"EVENT: updateRetailTableSingleton");
+		retailtable.setEditable(true);
+
+		ObservableList<RetailTuple> data = retailtable.getItems();
+		data.removeAll(data); // TRUNCATE
+
+		// TRUNCATE column values:
+		clearColumns();
+
+		// Draw the column headers:
+		if (isCustomer || isEmployee) {
+			Logger.getLogger(Retail.class.getName()).log(Level.INFO,
+					"EVENT: updateRetailTableSingleton - adding person based tuple");
+			tcCol0.setText("First Name");
+			tcCol1.setText("Last Name");
+			tcCol2.setText("Address");
+			tcCol3.setText("City");
+			tcCol4.setText("State");
+			tcCol5.setText("Zipcode");
+			tcCol6.setText("Gender");
+		} else if (isMerchandise) {
+			Logger.getLogger(Retail.class.getName()).log(Level.INFO,
+					"EVENT: updateRetailTableSingleton - adding MERCHANDISE tuple");
+			tcCol0.setText("Name");
+			tcCol1.setText("Price");
+			tcCol2.setText("Description");
+		}
+
+		// Add the singleton in:
+		Logger.getLogger(Retail.class.getName())
+				.log(Level.INFO,
+						"EVENT: updateRetailTable - reinserting tuples into retail JavaFX table.");
+		data = retailtable.getItems();
+		data.add(singleton);
+	}
+	
 	/**
 	 * @desc Truncate and then insert new rows into the retail table.
 	 * @param isCustomer
@@ -498,9 +551,9 @@ public class Retail extends Application implements Initializable {
 		ok.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				RetailTuple rt = new RetailTuple(name.getText(), price
-						.getText(), desc.getText());
-				derby.insertTuples("MERCHANDISE", packTuple(rt, true));
+				derby.insertMerchandiseTuple(name.getText(),Double.parseDouble(price.getText()),desc.getText());
+				updateRetailTableSingleton(false, false, true, new RetailTuple(
+						name.getText(), price.getText(), desc.getText()));
 				newStage.close();
 			}
 		});
@@ -644,9 +697,7 @@ public class Retail extends Application implements Initializable {
 		// Create MERCHANDISE table
 		ArrayList<String> createMerchandiseTable = new ArrayList<String>();
 		createMerchandiseTable.add("name VARCHAR(25)");
-		createMerchandiseTable.add("price VARCHAR(50)"); // in case a '$' is
-															// added for
-															// simplicity
+		createMerchandiseTable.add("price DECIMAL (20,2)"); // dollars and cents
 		createMerchandiseTable.add("description VARCHAR(200)");
 		derby.createTable("MERCHANDISE", createMerchandiseTable);
 
