@@ -16,7 +16,9 @@
 
 form                 {margin: 0px}
 
+/*
 fieldset             {width: 375px; height: 235px; padding: 5px; margin: 0px 10px 10px 0px; float: left}
+*/
 
 .blockLab            {position: relative; font-size: 14px; display: block; margin: 10px 0px}
 
@@ -30,7 +32,13 @@ fieldset             {width: 375px; height: 235px; padding: 5px; margin: 0px 10p
 
 .newline             {float: left; clear: left; display: block; width: 500px}
 
-
+fieldset {
+    float: left;
+    height: 235px;
+    margin: 0 10px 10px 0;
+    padding: 5px;
+    width: 375px;
+}
 
 
 

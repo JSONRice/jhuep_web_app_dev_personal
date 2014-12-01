@@ -17,9 +17,24 @@ input
    margin-bottom: .5em;
 }
 
+#dvd {
+   font-weight: bold;
+   margin-right: 82px;
+}
+
+#lan {
+   font-weight: bold;
+   margin-right: 100px;
+}
+
+#mcard {
+   font-weight: bold;
+   margin-right: 30px;
+}
+
 hr 
 {
-	color: blue;
+   color: blue;
 }
 
 fieldset 
