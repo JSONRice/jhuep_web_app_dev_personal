@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>jhuep_ent_web_dev</groupId>
-  <artifactId>jhuep_ent_web_dev</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <groupId>jhuep_web_app_dev_personal</groupId>
+  <artifactId>jhuep_web_app_dev_personal</artifactId>
+  <version>1.0</version>
+  <packaging>war</packaging>
 
   <name>src</name>
   <url>http://maven.apache.org</url>
@@ -26,12 +26,9 @@
   <build>
     <directory>target</directory>
     <outputDirectory>target/classes</outputDirectory>
-    <finalName>${artifactId}-${version}</finalName>
+    <finalName>${artifactId}</finalName>
     <testOutputDirectory>target/test-classes</testOutputDirectory>
     <sourceDirectory>src/main</sourceDirectory>
-<!--
-    <scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
--->
     <testSourceDirectory>src/test</testSourceDirectory>
     <resources>
       <resource>
@@ -45,6 +42,14 @@
     </testResources>
     <plugins>
       <plugin>
+	 <groupId>org.apache.maven.plugins</groupId>
+	 <artifactId>maven-war-plugin</artifactId>
+	 <version>2.6</version>
+         <configuration>
+            <webXml>WebContent/WEB-INF/web.xml</webXml>        
+         </configuration>	
+      </plugin>
+      <plugin>
         <!-- Build an executable JAR -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -54,9 +59,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-	      <mainClass>main.Driver</mainClass>
-              <mainClass>main.hw4_part1.Driver</mainClass>
-	      <mainClass>main.hw4_part2.Driver</mainClass>-->
+	      <mainClass>main.NewHorizonsDriver</mainClass>
             </manifest>
           </archive>
         </configuration>
