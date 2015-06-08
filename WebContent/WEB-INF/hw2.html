@@ -1,132 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
-   <title>Computer Order Form</title>
+   <title>JHU Annual Software Development Seminar</title>
    <link href="css/mill.css" rel="stylesheet" type="text/css" />
    <link href="css/oform.css" rel="stylesheet" type="text/css" />
    <link href="css/hw2.css" rel="stylesheet" type="text/css" />
    <script>
-      function cancelOrder() {
-         alert("Order has been canceled. Fields will be cleared.");
-      }
-      
-      function contactMe() {
-    	  alert("Contact Millenium Computers at: milleniumcomp@gmail.com\nor by phone at (608) 555-8441");
+      function computeSeminarCosts() {
+         alert("Unable to compute costs. Page under construction.");
       }
    </script>
 </head>
 
-
 <body>
 	<div id="heading">
-		<img src="images/mclogo.jpg" alt="Millennium Computers" />
+		<img src="images/jhu_logo_medium_nopadding.png" alt="JHU Logo" />
 	</div>
-	<div id="links">
-		<ul>
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Desktops</a></li>
-			<li><a href="#">Laptops</a></li>
-			<li><a href="#">Peripherals</a></li>
-			<li><a href="#">Support</a></li>
-			<li><a href="#">Your Account</a></li>
-			<li><a href="#">Shopping Cart</a></li>
-			<li><a href="#">Contact Us</a></li>
-		</ul>
-	</div>
-	<div id="pageContent">
-		<br>
-		<h1>Build Your Computer</h1>
+
+	<div id="pageContent">	
+		<h1>JOHNS HOPKINS ANNUAL DEVELOPMENT SEMINAR</h1>
 		<br>
 		<form name="order" id="cconfig" method="post">
-			<fieldset>
+			<fieldset id="contactinfo">
 				<legend>Contact Information</legend>
-				<label for="fname">First name</label> 
-				<input type="text" name="fname" autofocus required><br> 
-				<label for="lname">Last name</label> 
-				<input type="text" name="lname" required>
-				<br> 
-				<label for="street">Street</label> 
-				<input type="text" name="street" required>
-				<br> 
-				<label for="city">City</label> 
-				<input type="text" name="city" required>
-				<br>
-				<label for="state">State</label> 
-				<input type="text" name="state" required><br> 
-				<label for="zip">ZIP</label> 
-				<input type="text" name="zip" required pattern="\d{5}([\-]\d{4})?"
-					   title="Format must be: 99999 or 99999-9999"><br> 
-			    <label for="phone">Phone</label> 
-			    <input type="tel" name="phone" required pattern="\d{3}[\-]\d{3}[\-]\d{4}"
-					title="Format must be: 999-999-9999"><br>
-			</fieldset>
-			<fieldset>
-				<legend>Computer Configuration</legend>
-				<br> 
-				<label for="cpu">Processor Speed</label> 
-				<select name="cpu">
-					<option value="2.4">2.4 GHz</option>
-					<option value="3.2">3.2 GHz</option>
-					<option value="4.0">4.0 GHz</option>
-					<option value="5.5">5.5 GHz</option>
-				</select>
-				<br> 
-				<label for="ram">Memory</label> 
-				<select name="ram">
-					<option value="1">1 GB</option>
-					<option value="2">2 GB</option>
-					<option value="4">4 GB</option>
-					<option value="8">8 GB</option>
-					<option value="12">12 GB</option>
-				</select>
-				<br> 
-				<label for="mon">Monitor</label> 
-				<select name="mon">
-					<option value="15">15"</option>
-					<option value="17">17"</option>
-					<option value="19">19"</option>
-					<option value="21">21"</option>
-				</select>
-				<br> 
-				<label for="hdrive">Hard Drive</label> 
-				<select name="hdrive">
-					<option value="240">240 GB</option>
-					<option value="500">500 GB</option>
-					<option value="750">750 GB</option>
-					<option value="1000">1 TB</option>
-				</select>
-				<br/> 
-                                <span id="dvd">DVD Burner</span>
-                                <input style="width: 0px;" type="radio" name="dvd" VALUE="1">Yes
-                                <input style="width: 0px;" type="radio" name="dvd" VALUE="0" checked>No
+				<label for="name">Name</label> 
+				<input type="text" name="name" autofocus required>
 				<br/>
-				<span id="lan">LAN Card</span>
-				<input style="width: 0px;" type="radio" name="lan" value="1">Yes 
-				<input style="width: 0px;" type="radio" name="lan" value="0" checked>No
-				<br/>
-				<span id="mcard">Media Card Reader</span>
-				<input style="width: 0px;" type="radio" name="mcard" value="1">Yes 
-				<input style="width: 0px;" type="radio" name="mcard" value="0" checked>No
-				<br>
+				<label for="email">E-Mail</label>
+				<input type="email" name="email"
+					   title="Format must be: someuser@host.dom" required> 
 			</fieldset>
-			<div id="additionaloptions">
-				<input style="float: left" type="checkbox" name="warranty"
-					value="warranty">Yes, I want the 24-month extended warranty<br>
-				<br> Any special requests on your order?<br>
-				<textarea name="specialreqs" form="cconfig" rows="10" cols="60"></textarea>
-				<br>
-				<br> 
-				<input type="submit" value="Send Order"> 
-				<input type="reset" value="Cancel Order" onclick="javascript:cancelOrder()"> 
-				<input type="button" value="Contact Me" onclick="javascript:contactMe()">
-			</div>
-			<br /> <br /> <br />
+			<br/>			
+			<fieldset id="courseselections">
+				<legend>Select Your Courses</legend>
+				<select name="courses" multiple>
+					<option value="A4">A4 - Web Services</option>
+					<option value="A1">A1 - J2EE Design Patterns</option>
+					<option value="A3">A3 - Service Oriented Architecture</option>
+					<option value="A4">A4 - Enterprise Service Bus</option>
+					<option value="A6">A6 - Secure Messaging</option>
+					<option value="A5">A5 - Web Services Security</option>			
+				</select>
+				<span id="select_instructions">Hold down the Ctrl (Windows-Linux) / Command (Mac) button to select multiple courses.</span>
+			</fieldset>
+			<br/>						
+			<fieldset id="additionaloptions">
+				<legend>Additional Fees and Charges</legend>
+				<input style="width: 0px;" type="checkbox" name="user" value="0">Hotel Accommodation (Conference Guest Special Fee - Parking Included)</input>
+		   	    <br/>
+			    <input style="width: 0px;" type="checkbox" name="user" value="0">Parking Permit</input>
+			    <br/>
+			</fieldset>	
+			<br/>						
+			<fieldset id="employmentstatus">
+				<legend>Employment Status</legend>
+				<input style="width: 0px;" type="radio" name="user" value="0">JHU Employee</input>
+		   	    <input style="width: 0px;" type="radio" name="user" value="0">JHU Student</input>
+                <input style="width: 0px;" type="radio" name="user" value="0">Speaker</input>
+	   	  	    <input style="width: 0px;" type="radio" name="user" value="0">Other</input>
+			</fieldset>
+			<input type="button" value="Compute Seminar Cost" onclick="javascript:computeSeminarCosts()">
+			<br/><br/>
 			<div id="footer">
 				<hr />
-				<p align="center">Millennium Computer &#8226; 100 Commerce Drive
-					&#8226; Madison, WI 53597 &#8226; (608) 555 - 8441</p>
+				<p align="center">Rice Enterprises Web Development</p>
 			</div>
 		</form>
 	</div>

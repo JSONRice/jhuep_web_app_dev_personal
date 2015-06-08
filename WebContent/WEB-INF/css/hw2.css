@@ -1,3 +1,14 @@
+/*
+   Homework 2 Default Style Sheet
+   
+   Description: Labels and other elements are stacked with float to the left and aligned left.
+   Everything should align in an equal fashion to the left side. This allows elements to be 'stacked'
+   on top of each other.
+
+   Filename:         hw2.css
+*/
+
+
 ul
 {
    list-style-type: none;
@@ -52,22 +63,25 @@ textarea
 /**
  Extra spacing for the computer configuration field set elements.
 **/
-#cconfig label,input
-{
+#cconfig label,input {
 	width: 12em;	
 }
 
-#cconfig select
-{
-	width: 7em;
+#cconfig select {
 	align: left;
+	width: 100%;
+	height: 100%;
+}
+
+#select_instructions {
+	font-weight: bold;
+	font-size: 12px;
 }
 
 /**
  Make sure that the additional options disregards floats so that it appears at the bottom.
 **/
-#additionaloptions
-{
+#additionaloptions {
 	clear:both;
 }
 
@@ -79,10 +93,11 @@ textarea
 /**
  Forces the footer to anchor onto the bottom of the page.
 **/
-#footer 
-{
+#footer {
+	
     font-size: 12px;
     height: 50px;
     width: 100%;
-    color: blue;
+    color: skyblue;
+    font-weight: bold;
 }
