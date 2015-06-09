@@ -1,76 +1,76 @@
 <!DOCTYPE html>
 <html>
-<head>
-   <title>JHU Annual Software Development Seminar</title>
-   <link href="css/mill.css" rel="stylesheet" type="text/css" />
-   <link href="css/oform.css" rel="stylesheet" type="text/css" />
-   <link href="css/hw2.css" rel="stylesheet" type="text/css" />
-   <script>
-      function computeSeminarCosts() {
-         alert("Unable to compute costs. Page under construction.");
-      }
-   </script>
-</head>
+    <head>
+        <title>JHU Annual Software Development Seminar</title>
+        <link href="css/mill.css" rel="stylesheet" type="text/css" />
+        <link href="css/oform.css" rel="stylesheet" type="text/css" />
+        <link href="css/hw2.css" rel="stylesheet" type="text/css" />
+        <script>
+            function computeSeminarCosts() {
+                alert("Unable to compute costs. Page under construction.");
+            }
+        </script>
+    </head>
 
-<body>
-	<div id="heading">
-		<img src="images/jhu_logo_medium_nopadding.png" alt="JHU Logo" />
-	</div>
-	<div id="pageContent">	
-		<h3>JOHNS HOPKINS ANNUAL DEVELOPMENT SEMINAR</h3>
-		<form name="order" id="cconfig" method="post">
-			<fieldset id="contactinfo">
-				<legend>Contact Information</legend>
-				<label for="name">Name</label> 
-				<input type="text" name="name" autofocus required>
-				<br/>
-				<label for="email">E-Mail</label>
-				<input type="email" name="email"
-					   title="Format must be: someuser@host.dom" required> 
-			</fieldset>
-			<fieldset id="courseselections">
-				<legend>Select Your Courses</legend>
-				<select name="courses" multiple>
-					<option value="A4">A4 - Web Services</option>
-					<option value="A1">A1 - J2EE Design Patterns</option>
-					<option value="A3">A3 - Service Oriented Architecture</option>
-					<option value="A4">A4 - Enterprise Service Bus</option>
-					<option value="A6">A6 - Secure Messaging</option>
-					<option value="A5">A5 - Web Services Security</option>			
-				</select>
-				<span id="select_instructions">Hold down the Ctrl (Windows-Linux) / Command (Mac) button to select multiple courses.</span>
-			</fieldset>
-			<fieldset id="additionaloptions">
-				<legend>Additional Fees and Charges</legend>
-				<input style="width: 0px;" type="checkbox" name="user" value="0">Hotel Accommodation (Conference Guest Special Fee - Parking Included)</input>
-		   	    <br/>
-			    <input style="width: 0px;" type="checkbox" name="user" value="0">Parking Permit</input>
-			    <br/>
-			</fieldset>	
-			<fieldset id="employmentstatus">
-				<legend>Employment Status</legend>
-				<ul>
-					<li>
-						 <input style="width: 0px;" type="radio" name="user" value="0">JHU Employee</input>
-					</li>
-					<li>
-						 <input style="width: 0px;" type="radio" name="user" value="0">JHU Student</input>
-					</li>
-					<li>
-						 <input style="width: 0px;" type="radio" name="user" value="0">Speaker</input>
-					</li>
-					<li>
-						 <input style="width: 0px;" type="radio" name="user" value="0">Other</input>
-					</li>					
-				</ul>
-			</fieldset>
-			<input type="button" value="Compute Seminar Cost" onclick="javascript:computeSeminarCosts()">
-			<br/>
-			<div id="footer">
-				<hr />
-				<p align="center">Rice Enterprises Web Development</p>
-			</div>
-		</form>
-	</div>
-</body>
+    <body>
+        <div id="heading">
+            <img src="images/jhu_logo_medium_nopadding.png" alt="JHU Logo" />
+        </div>
+        <div id="pageContent">	
+            <h3>JOHNS HOPKINS ANNUAL DEVELOPMENT SEMINAR</h3>
+            <form name="order" id="cconfig" method="post">
+                <fieldset id="contactinfo">
+                    <legend>Contact Information</legend>
+                    <label for="name">Name</label> 
+                    <input type="text" name="name" autofocus required>
+                    <br/>
+                    <label for="email">E-Mail</label>
+                    <input type="email" name="email"
+                           title="Format must be: someuser@host.dom" required> 
+                </fieldset>
+                <fieldset id="courseselections">
+                    <legend>Select Your Courses</legend>
+                    <select name="courses" multiple>
+                        <option value="A4">A4 - Web Services</option>
+                        <option value="A1">A1 - J2EE Design Patterns</option>
+                        <option value="A3">A3 - Service Oriented Architecture</option>
+                        <option value="A4">A4 - Enterprise Service Bus</option>
+                        <option value="A6">A6 - Secure Messaging</option>
+                        <option value="A5">A5 - Web Services Security</option>			
+                    </select>
+                    <span id="select_instructions">Hold down the Ctrl (Windows-Linux) / Command (Mac) button to select multiple courses.</span>
+                </fieldset>
+                <fieldset id="additionaloptions">
+                    <legend>Additional Fees and Charges</legend>
+                    <input type="checkbox" name="user" value="0">Hotel Accommodation (Conference Guest Special Fee - Parking Included)
+                    <br/>
+                    <input type="checkbox" name="user" value="0">Parking Permit
+                    <br/>
+                </fieldset>	
+                <fieldset id="employmentstatus">
+                    <legend>Employment Status</legend>
+                    <ul>
+                        <li>
+                            <input type="radio" name="user" value="0">JHU Employee
+                        </li>
+                        <li>
+                            <input type="radio" name="user" value="0">JHU Student
+                        </li>
+                        <li>
+                            <input type="radio" name="user" value="0">Speaker
+                        </li>
+                        <li>
+                            <input type="radio" name="user" value="0">Other
+                        </li>					
+                    </ul>
+                </fieldset>
+                <input type="button" value="Compute Seminar Cost" onclick="javascript:computeSeminarCosts()">
+                <br/>
+                <div id="footer">
+                    <hr />
+                    <p align="center">Rice Enterprises Web Development</p>
+                </div>
+            </form>
+        </div>
+    </body>
 </html>

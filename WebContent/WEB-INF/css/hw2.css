@@ -16,7 +16,6 @@ ul {
 label {
    float: left;
    width: 8em;
-   align: left;
 }
 
 input {
@@ -27,10 +26,6 @@ input {
 
 hr {
    color: blue;
-}
-
-fieldset {
-   align: right;
 }
 
 textarea {
@@ -48,7 +43,6 @@ textarea {
 
 #cconfig select {
 	margin: 0 10px 10px 0;	
-	align: left;
 	width: 100%;
 	height: 100%;
 }
@@ -82,6 +76,11 @@ textarea {
 }
 
 ul {
-	margin: 0 10px 10px 0;
-	padding: 1px;
+    margin: 0 10px 10px 0;
+    padding: 1px;
+}
+
+/* Decrease spacing for the radio buttons and checkboxes with the field sets. */
+input[type="radio"], input[type="checkbox"] {
+    width: 1em;
 }
