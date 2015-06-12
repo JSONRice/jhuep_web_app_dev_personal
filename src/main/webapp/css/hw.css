@@ -1,5 +1,5 @@
 /*
-   Homework 2 Default Style Sheet
+   Homework Default Style Sheet
    
    Description: Labels and other elements are stacked with float to the left and aligned left.
    Everything should align in an equal fashion to the left side. This allows elements to be 'stacked'
@@ -26,6 +26,7 @@ input {
 
 hr {
    color: blue;
+   width: 100%;
 }
 
 textarea {

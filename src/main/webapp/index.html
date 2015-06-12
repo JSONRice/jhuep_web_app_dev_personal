@@ -4,21 +4,17 @@
         <title>JHU Annual Software Development Seminar</title>
         <link href="css/mill.css" rel="stylesheet" type="text/css" />
         <link href="css/oform.css" rel="stylesheet" type="text/css" />
-        <link href="css/hw2.css" rel="stylesheet" type="text/css" />
-        <script>
-            function computeSeminarCosts() {
-                alert("Unable to compute costs. Page under construction.");
-            }
-        </script>
+        <link href="css/hw.css" rel="stylesheet" type="text/css" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
     </head>
 
     <body>
         <div id="heading">
             <img src="images/jhu_logo_medium_nopadding.png" alt="JHU Logo" />
         </div>
-        <div id="pageContent">	
+        <div id="pageContent" class="content">	
             <h3>JOHNS HOPKINS ANNUAL DEVELOPMENT SEMINAR</h3>
-            <form name="order" id="cconfig" method="post">
+            <form name="order" id="cconfig" action="compute_cost.jsp" method="post">
                 <fieldset id="contactinfo">
                     <legend>Contact Information</legend>
                     <label for="name">Name</label> 
@@ -30,13 +26,13 @@
                 </fieldset>
                 <fieldset id="courseselections">
                     <legend>Select Your Courses</legend>
-                    <select name="courses" multiple>
-                        <option value="A4">A4 - Web Services</option>
-                        <option value="A1">A1 - J2EE Design Patterns</option>
-                        <option value="A3">A3 - Service Oriented Architecture</option>
-                        <option value="A4">A4 - Enterprise Service Bus</option>
-                        <option value="A6">A6 - Secure Messaging</option>
-                        <option value="A5">A5 - Web Services Security</option>			
+                    <select name="courses" id="courses" multiple>
+                        <option value="A4" id="A4">A4 - Web Services</option>
+                        <option value="A1" id="A1">A1 - J2EE Design Patterns</option>
+                        <option value="A3" id="A3">A3 - Service Oriented Architecture</option>
+                        <option value="A2" id="A2">A2 - Enterprise Service Bus</option>
+                        <option value="A6" id="A6">A6 - Secure Messaging</option>
+                        <option value="A5" id="A5">A5 - Web Services Security</option>			
                     </select>
                     <span id="select_instructions">Hold down the Ctrl (Windows-Linux) / Command (Mac) button to select multiple courses.</span>
                 </fieldset>
@@ -64,12 +60,7 @@
                         </li>					
                     </ul>
                 </fieldset>
-                <input type="button" value="Compute Seminar Cost" onclick="javascript:computeSeminarCosts()">
-                <br/>
-                <div id="footer">
-                    <hr />
-                    <p align="center">Rice Enterprises Web Development</p>
-                </div>
+                <input type="submit" value="Compute Seminar Cost">
             </form>
         </div>
     </body>
