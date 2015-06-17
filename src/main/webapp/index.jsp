@@ -25,7 +25,7 @@
         </div>
         -->
         <div id="pageContent" class="content">
-            <form name="order" id="signup" action="compute_cost.jsp" method="post">
+            <form name="order" id="signup" action="ComputeCost" method="post">
                 <fieldset id="contactinfo">
                     <legend>Contact Information</legend>
                     <label for="name">Name</label> 
