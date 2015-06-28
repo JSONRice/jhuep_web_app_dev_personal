@@ -25,19 +25,19 @@
         </div>
         -->
         <div id="pageContent" class="content">
-            <form name="order" id="signup" action="ComputeCost" method="post">
+            <form name="order" id="signup" action="ComputeCostController" method="post">
                 <fieldset id="contactinfo">
                     <legend>Contact Information</legend>
                     <label for="name">Name</label> 
-                    <input type="text" name="name" autofocus required>
+                    <input type="text" name="name" autofocus>
                     <br/>
                     <label for="email">E-Mail</label>
                     <input type="email" name="email"
-                           title="Format must be: someuser@host.dom" required> 
+                           title="Format must be: someuser@host.dom"> 
                 </fieldset>
                 <fieldset id="courseselections">
                     <legend>Select Your Courses</legend>
-                    <select name="courses" id="courses" multiple required>
+                    <select name="courses" id="courses" multiple>
                         <option value="A4 - Web Services" id="A4">A4 - Web Services</option>
                         <option value="A1 - J2EE Design Patterns" id="A1">A1 - J2EE Design Patterns</option>
                         <option value="A3 - Service Oriented Architecture" id="A3">A3 - Service Oriented Architecture</option>
@@ -55,20 +55,20 @@
                     <input type="checkbox" name="accomodations" value="Parking Permit">Parking Permit
                     <br/>
                 </fieldset>	
-                <fieldset id="employmentstatus" required>
+                <fieldset id="employmentstatus">
                     <legend>Employment Status</legend>
                     <ul>
                         <li>
-                            <input type="radio" name="user_type" value="JHU Employee" required>JHU Employee
+                            <input type="radio" name="user_type" value="JHU Employee">JHU Employee
                         </li>
                         <li>
-                            <input type="radio" name="user_type" value="JHU Student" required>JHU Student
+                            <input type="radio" name="user_type" value="JHU Student">JHU Student
                         </li>
                         <li>
-                            <input type="radio" name="user_type" value="Speaker" required>Speaker
+                            <input type="radio" name="user_type" value="Speaker">Speaker
                         </li>
                         <li>
-                            <input type="radio" name="user_type" value="Other" required>Other
+                            <input type="radio" name="user_type" value="Other">Other
                         </li>					
                     </ul>
                 </fieldset>
