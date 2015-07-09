@@ -3,12 +3,12 @@
     <display-name>jhuep_web_app_dev_personal</display-name>
     <servlet>
         <servlet-name>ComputeCostController</servlet-name>
-        <servlet-class>resources.servlets.ComputeCostController</servlet-class>
+        <servlet-class>resources.newhorizons.controllers.ComputeCostController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ComputeCostController</servlet-name>
         <url-pattern>/ComputeCostController</url-pattern>
-   </servlet-mapping>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

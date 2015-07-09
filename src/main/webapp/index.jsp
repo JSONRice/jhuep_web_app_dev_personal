@@ -17,13 +17,6 @@
     </head>
     <body>
         <%@ include file="banner.jsp" %>
-        <!--
-        <div style="display:none;" id="modal" class="index-modal">
-            <p>
-                <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0; color: white">Hello World</span>
-            </p>
-        </div>
-        -->
         <div id="pageContent" class="content">
             <form name="order" id="signup" action="ComputeCostController" method="post">
                 <fieldset id="contactinfo">
