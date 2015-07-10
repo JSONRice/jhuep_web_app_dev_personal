@@ -3,7 +3,7 @@
     <display-name>jhuep_web_app_dev_personal</display-name>
     <servlet>
         <servlet-name>ComputeCostController</servlet-name>
-        <servlet-class>resources.newhorizons.controllers.ComputeCostController</servlet-class>
+        <servlet-class>resources.servlets.ComputeCostController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ComputeCostController</servlet-name>
