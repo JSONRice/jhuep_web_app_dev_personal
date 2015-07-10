@@ -150,3 +150,13 @@ input[type="radio"], input[type="checkbox"] {
     text-align:center;
     vertical-align:middle;   
 }
+
+.remove {
+    padding: 6px 12px 0px 0px !important;
+}
+
+.action-buttons {
+    padding: 0px !important;
+    margin: 0px !important;
+    width: auto;
+}
