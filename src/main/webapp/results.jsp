@@ -9,9 +9,11 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.HashMap"%>
 <%@ page import="java.util.ArrayList"%>
+
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="resources.dispatch.ComputeCostBean" %>
-<jsp:useBean id="results" class="resources.dispatch.ComputeCostBean" scope="request"/>
+<jsp:useBean id="computeCostBean" class="resources.dispatch.ComputeCostBean" scope="session"/>
+<jsp:setProperty name="computeCostBean" property="*" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,14 +27,14 @@
         <%@ include file="banner.jsp" %>
         <div id="pageContent">	
             <hr/>
-            <h4><%= results.getName()%></h4>
+            <h4>${computeCostBean.name}</h4>
             <%
-                double cost = results.getCost();
+                double cost = computeCostBean.getCost();
             %>            
-            You are registered as a <b><%= results.getName()%></b>
+            You are registered as a <b>${computeCostBean.status}</b>
             <br/>
             <br/>
-            Your e-mail confirmation will be sent to: <span class="email"><%= results.getEmail()%></span>
+            Your e-mail confirmation will be sent to: <span class="email">${computeCostBean.email}</span>
             <br/>
             <br/>
             <form name="results" id="confirmation" action="ConfirmationController" method="post">
@@ -42,12 +44,14 @@
                         <th>Cost</th>
                     </tr>
                     <%
-                        ArrayList<String> selectedCourses = results.getCourses();
+                        ArrayList<String> selectedCourses = computeCostBean.getCourses();
                         int numCourses = selectedCourses.size();
                         for (String course : selectedCourses) {
                     %>
                     <tr>
-                        <td class="grid-border"><%= course%></td><td class="grid-border cost"><%= String.format("%.2f", cost)%></td><td class="grid-border remove"><input type="button" id="remove" value="Remove"></td>
+                        <td class="grid-border"><%= course %></td>
+                        <td class="grid-border cost"><%= String.format("%.2f", cost)%></td>
+                        <td class="grid-border remove"><input type="button" id="remove" value="Remove"></td>
                     </tr>
                     <%
                         }
@@ -55,7 +59,7 @@
                     <!-- Insert an empty row to provide spacing between courses and accomodations: -->
                     <tr class="empty-row"/>
                     <%
-                        HashMap<String, Double> accomodationCostPairs = results.getAccomodationCostPairs();
+                        HashMap<String, Double> accomodationCostPairs = computeCostBean.getAccomodationCostPairs();
                         double totalCurrentAccomCost = 0.00;
                         if (accomodationCostPairs != null) {
                             Iterator itr = accomodationCostPairs.entrySet().iterator();
@@ -66,21 +70,21 @@
                                 Double currentAccomCost = (Double) pair.getValue();
 
                                 itr.remove(); // avoids a ConcurrentModificationException
-
                     %>
                     <tr>
-                        <td class="accomodation"><%= accomodation%></td>
+                        <td class="accomodation"><%= accomodation %></td>
                         <td class="cost"><%= String.format("%.2f", currentAccomCost)%></td>
                     </tr>
                     <%
-                            }
+                           }
                         }
+                        Double totalCost = computeCostBean.getTotalCost();
                     %>
                     <tr>
                         <td><hr style="color:black"/><td>
                     </tr>
                     <tr>
-                        <th>Total</th><td class="cost total-cost" id="total"><%= String.format("%.2f", results.getTotalCost())%></td>
+                        <th>Total</th><td class="cost total-cost" id="total"><%= String.format("%.2f", totalCost)%></td>
                     </tr>
                     <tr>
                         <td class="action-buttons">
@@ -89,7 +93,8 @@
                                  As the homework describes: Clicking on "Add More Courses" should take the user back to the course selection page. 
                                  This does not mention any state should be preserved, so the page will be refreshed (new session). 
                             -->
-                            <input type="button" id="add" onclick="window.location = 'index.jsp'" value="Add More Courses">                        
+                            <input type="button" id="add" onclick="window.location = 'logout.jsp'" value="Add More Courses"> 
+                            <!-- Submit will redirect to the confirmation.jsp page -->
                             <input type="submit" id="confirm" value="Confirm Registration">
                         </td>                    
                     </tr>

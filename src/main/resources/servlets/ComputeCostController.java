@@ -3,6 +3,7 @@ package resources.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -10,9 +11,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import resources.dispatch.ComputeCostBean;
 import resources.dispatch.ErrorBean;
+import resources.dispatch.FormValidationBean;
 
 /**
  * @author jsnrice
@@ -33,16 +36,27 @@ public class ComputeCostController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ComputeCostBean costBean = new ComputeCostBean();
+        HttpSession session = request.getSession();
+        FormValidationBean formValidationBean = new FormValidationBean();
+        ComputeCostBean computeCostBean = new ComputeCostBean();
+        LOGGER.log(Level.INFO, "Allocated memory for formValidationBean.");        
+
         // Any errors that are found will be thrown as a NullPointerException 
         // with a defined error message (e.g. no courses selected):
         try {
-            costBean.setName(request);
-            costBean.setEmail(request);
-            costBean.setCourses(request);
-            costBean.setAccomodations(request);
-            costBean.setCost(request);
-            costBean.computeTotalCost();
+            // Set all the attribute properties into the bean:
+            computeCostBean.setName(request.getParameter("name"));
+            computeCostBean.setEmail(request.getParameter("email"));
+            computeCostBean.setCourses(request.getParameterValues("courses"));
+            computeCostBean.setAccomodations(request.getParameterValues("accomodations"));
+            computeCostBean.setStatus(request.getParameter("user_type"));
+            computeCostBean.setCost(request.getParameter("user_type"));
+            computeCostBean.computeTotalCost();
+
+            /*
+            formValidationBean.checkFields((String) session.getAttribute("name"), 
+                                           (String) session.getAttribute("email"));
+            */
         } // If any errors are found route to an error page:
         catch (NullPointerException npe) {
             String stackTrace = convertStackTrace(npe);
@@ -51,18 +65,21 @@ public class ComputeCostController extends HttpServlet {
             String errorMsg = npe.getMessage();
             if (errorMsg == null || errorMsg.isEmpty()) {
                 error = new ErrorBean("Unhandled form error detected. Please contact web master.");
-            } else {
+            } 
+            else {
                 error = new ErrorBean(errorMsg);
             }
+            /*
             request.setAttribute("error", error);
             RequestDispatcher errorDispatcher
                     = getServletConfig().getServletContext().getRequestDispatcher("/error.jsp");
             errorDispatcher.forward(request, response);
+            */
         }
         // If there was an exception and a previous redirect, prevent the folowing redirect:
         if (!response.isCommitted()) {
-            // Else if no errors store our results and dispatch (route) to the results page:
-            request.setAttribute("results", costBean);
+            // Else if no errors store our bean and dispatch (route) to the results page:
+            session.setAttribute("computeCostBean", computeCostBean);
             RequestDispatcher resultsDispatcher
                     = getServletConfig().getServletContext().getRequestDispatcher("/results.jsp");
             resultsDispatcher.forward(request, response);
@@ -70,9 +87,10 @@ public class ComputeCostController extends HttpServlet {
     }
 
     /**
-     * @description Given a Throwable (Exception) convert the stack trace to a String and return.
-     * @param e
-     * @return 
+     * @description Given a Throwable (Exception) convert the stack trace to a
+     * String and return.
+     * @param t 
+     * @return
      */
     public static String convertStackTrace(Throwable t) {
         StringWriter sw = new StringWriter();

@@ -4,6 +4,8 @@
     Author     : jsnrice
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="computeCostBean" class="resources.dispatch.ComputeCostBean" scope="session"/>
+<jsp:setProperty name="computeCostBean" property="*"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,10 +24,12 @@
                 <fieldset id="contactinfo">
                     <legend>Contact Information</legend>
                     <label for="name">Name</label> 
-                    <input type="text" name="name" autofocus>
+                    <input type="text" name="name" 
+                           value="<jsp:getProperty name="computeCostBean" property="name" />" autofocus>
                     <br/>
                     <label for="email">E-Mail</label>
-                    <input type="email" name="email"
+                    <input type="email" name="email" 
+                           value="<jsp:getProperty name="computeCostBean" property="email" />"
                            title="Format must be: someuser@host.dom"> 
                 </fieldset>
                 <fieldset id="courseselections">
@@ -41,6 +45,7 @@
                     <br/>
                     <span id="select_instructions">Hold down the Ctrl (Windows-Linux) / Command (Mac) button to select multiple courses.</span>
                 </fieldset>
+
                 <fieldset id="additionaloptions">
                     <legend>Additional Fees and Charges</legend>
                     <input type="checkbox" name="accomodations" value="Hotel Accomodation">Hotel Accommodation (Conference Guest Special Fee - Parking Included)
@@ -48,6 +53,7 @@
                     <input type="checkbox" name="accomodations" value="Parking Permit">Parking Permit
                     <br/>
                 </fieldset>	
+
                 <fieldset id="employmentstatus">
                     <legend>Employment Status</legend>
                     <ul>

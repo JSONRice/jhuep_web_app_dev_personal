@@ -24,6 +24,7 @@ public class ComputeCostBean {
     private double totalCost;
     private double totalCurrentAccomCost;
     private String name;
+    private String status;
     private String email;
     private ArrayList<String> courses;
     private HashMap<String, Double> accomodationCostPairs;
@@ -40,56 +41,42 @@ public class ComputeCostBean {
         accomodationCostPairs = new HashMap<String, Double>();
     }
     
-    public synchronized void setName(HttpServletRequest request)
-        throws NullPointerException {
-        String name = request.getParameter("name");
-        if (name == null || name.equals("")) {
-            LOGGER.severe("No Name Was Entered");
-            throw new NullPointerException("No Name Was Entered");
-        }
-        else {
-            LOGGER.severe("Name set to: " + this.name);            
-            this.name = name;
-        }
+    public synchronized void setName(String n) {
+        this.name = n;
     }
     
-    public synchronized void setEmail(HttpServletRequest request)
-        throws NullPointerException {
-        String email = request.getParameter("email");
-        if (email == null || email.equals("")) {
-            LOGGER.severe("No Email Was Entered");
-            throw new NullPointerException("No Email Was Entered");
-        }
-        else {
-            LOGGER.severe("Email set to: " + this.email);            
-            this.email = email;
-        }
+    public synchronized void setEmail(String e) {
+        this.email = e;
+    }
+    
+    public synchronized void setStatus(String employmentStatus) {
+        this.status = employmentStatus;
     }
 
-
-    public synchronized void setCost(HttpServletRequest request)
-            throws NullPointerException {
-        String employmentStatus = request.getParameter("user_type");
-        if (employmentStatus == null || employmentStatus.equals("")) {
-            throw new NullPointerException("No Employment Status Was Selected");
-        }
+    public synchronized void setCost(String employmentStatus) {
         // Speakers are not charged:
+        if (employmentStatus == null) {
+            return;
+        }
+        
         if (employmentStatus.equals("Speaker")) {
             this.cost = 0.00;
-        } else if (employmentStatus.equals("JHU Employee")) {
+        } 
+        else if (employmentStatus.equals("JHU Employee")) {
             this.cost = 850.00;
-        } else if (employmentStatus.equals("JHU Student")) {
+        } 
+        else if (employmentStatus.equals("JHU Student")) {
             this.cost = 1000.00;
-        } else if (employmentStatus.equals("Other")) {
+        } 
+        else if (employmentStatus.equals("Other")) {
             this.cost = 1350.00;
         }
     }
 
-    public synchronized void setCourses(HttpServletRequest request)
+    public synchronized void setCourses(String[] myCourses)
             throws NullPointerException {
         // reset (remove) any old fields in case any where selected:
         courses.clear();
-        String[] myCourses = request.getParameterValues("courses");
         if (myCourses == null){
             throw new NullPointerException("No Courses Where Selected");            
         }
@@ -99,11 +86,10 @@ public class ComputeCostBean {
         }
     }
 
-    public synchronized void setAccomodations(HttpServletRequest request) {
+    public synchronized void setAccomodations(String[] accomodations) {
         // reset (remove) any old fields in case any where selected:
         accomodationCostPairs.clear();
         totalCurrentAccomCost = 0.00;
-        String[] accomodations = request.getParameterValues("accomodations");
         if (accomodations == null || accomodations.length <= 0) {
             return;
         }
@@ -146,6 +132,10 @@ public class ComputeCostBean {
 
     public synchronized String getName() {
         return name;
+    }
+    
+    public synchronized String getStatus() {
+        return status;
     }
 
     public synchronized String getEmail() {

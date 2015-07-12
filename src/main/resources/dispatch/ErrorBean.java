@@ -22,8 +22,7 @@ public class ErrorBean {
    public ErrorBean(final String defaultMsg){
        errorMsg = defaultMsg;
    }
-   
-   
+      
    private void setErrorMsg(String msg){
        if (msg == null || msg.trim().isEmpty()){
            return;
