@@ -79,16 +79,16 @@
                     <legend>Employment Status</legend>
                     <ul>
                         <li>
-                            <input type="radio" name="user_type" value="JHU Employee">JHU Employee
+                            <input type="radio" name="user_type" value="JHU Employee" ${computeCostBean.status == "JHU Employee" ? 'checked' : ''}>JHU Employee
                         </li>
                         <li>
-                            <input type="radio" name="user_type" value="JHU Student">JHU Student
+                            <input type="radio" name="user_type" value="JHU Student" ${computeCostBean.status == "JHU Student" ? 'checked' : ''}>JHU Student
                         </li>
                         <li>
-                            <input type="radio" name="user_type" value="Speaker">Speaker
+                            <input type="radio" name="user_type" value="Speaker" ${computeCostBean.status == "Speaker" ? 'checked' : ''}>Speaker
                         </li>
                         <li>
-                            <input type="radio" name="user_type" value="Other">Other
+                            <input type="radio" name="user_type" value="Other" ${computeCostBean.status == "Other" ? 'checked' : ''}>Other
                         </li>					
                     </ul>
                 </fieldset>
