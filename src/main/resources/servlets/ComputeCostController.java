@@ -3,6 +3,7 @@ package resources.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,20 +51,29 @@ public class ComputeCostController extends HttpServlet {
             LOGGER.log(Level.INFO, "Email set in controller.");                    
             computeCostBean.setEmail(request.getParameter("email"));
             computeCostBean.setSelectedCourses(request.getParameterValues("courses"));
-            LOGGER.log(Level.INFO, "Courses set in controller.");                                
-            computeCostBean.setAccomodations(request.getParameterValues("accomodations"));
-            LOGGER.log(Level.INFO, "Accomodations set in controller.");                                
+            LOGGER.log(Level.INFO, "Courses set in controller.");                        
             computeCostBean.setStatus(request.getParameter("user_type"));
             LOGGER.log(Level.INFO, "Employment status set in controller.");                                            
             computeCostBean.setCost(request.getParameter("user_type"));
-            LOGGER.log(Level.INFO, "Cost set in controller.");                    
-            computeCostBean.computeTotalCost();
-            LOGGER.log(Level.INFO, "Total cost compute in controller.");                    
-
-            /*
-            formValidationBean.checkFields((String) session.getAttribute("name"), 
-                                           (String) session.getAttribute("email"));
-            */
+            LOGGER.log(Level.INFO, "Cost set in controller.");                                
+            computeCostBean.setHotel(request.getParameter("hotelaccomodation"));
+            computeCostBean.setParking(request.getParameter("parkingaccomodation"));
+            
+            // Set the accomodations map if any where selected above:
+            ArrayList<String> accomodations = new ArrayList<>();
+            if (computeCostBean.getHotel() != null && computeCostBean.getHotel()) {
+                accomodations.add("Hotel Accomodation");
+            }
+            if (computeCostBean.getParking() != null && computeCostBean.getParking()) {
+                accomodations.add("Parking Permit");
+            }
+            
+            computeCostBean.setAccomodations((String []) accomodations.toArray(new String[accomodations.size()]));            
+            LOGGER.log(Level.INFO, "All accomodations accounted for.");                   
+            
+            // Finally compute the total cost:
+            computeCostBean.computeTotalCost();            
+            LOGGER.log(Level.INFO, "Total cost computed in bean.");                   
         } // If any errors are found route to an error page:
         catch (NullPointerException npe) {
             String stackTrace = convertStackTrace(npe);

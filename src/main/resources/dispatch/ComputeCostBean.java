@@ -30,6 +30,12 @@ public class ComputeCostBean {
     private String status;
     private String email;
     private ArrayList<String> selectedCourses;
+
+    /* Accomodations flags: */
+    private Boolean hotel;
+
+    private Boolean parking;
+    
     private final String[] courseNames = {
                                     "A1 - J2EE Design Patterns", 
                                     "A2 - Enterprise Service Bus", 
@@ -46,13 +52,14 @@ public class ComputeCostBean {
    
     private HashMap<String, Double> accomodationCostPairs;
       
-    // ACCESSORS:
-
     public ComputeCostBean() {
         cost = totalCost = totalCurrentAccomCost = 0.00;
         name = "";
         email = "";
-        
+
+        hotel = false;
+        parking = false;
+
         // 6 courses:
         selectedCoursesState = new ArrayList<>(6);
         selectedCoursesState.add("");
@@ -63,6 +70,28 @@ public class ComputeCostBean {
         selectedCoursesState.add("");           
         selectedCourses = new ArrayList<>();
         accomodationCostPairs = new HashMap<>();
+    }
+
+    public void setHotel(String hotel) {
+        if (hotel == null || hotel.trim().isEmpty()) {
+            LOGGER.log(Level.INFO, "Hotel accomodation not selected.");        
+            this.hotel = false;
+        }
+        else {
+            LOGGER.log(Level.INFO, "Hotel accomodation selected.");                    
+            this.hotel = true;
+        }
+    }
+
+    public void setParking(String parking) {
+        if (parking == null || parking.trim().isEmpty()) {
+            LOGGER.log(Level.INFO, "Parking accomodation not selected.");                                
+            this.parking = false;
+        }
+        else {
+            LOGGER.log(Level.INFO, "Parking accomodation selected.");                                
+            this.parking = true;
+        }
     }
     
     public synchronized void setName(String n) {
@@ -147,24 +176,34 @@ public class ComputeCostBean {
         String parking = "Parking Permit";
         for (String accomodation : accomodations) {
             if (accomodation.equals(hotel)) {
-                accomCost = 185.00;               
+                accomCost = 185.00;
+                LOGGER.log(Level.INFO, "Adding {0} for ${1}", new Object[]{hotel, accomCost});
                 accomodationCostPairs.put(hotel, accomCost);
             } else if (accomodation.equals(parking)) {
                 accomCost = 10.00;
+                LOGGER.log(Level.INFO, "Adding {0} for ${1}", new Object[]{parking, accomCost});                
                 accomodationCostPairs.put(parking, accomCost);                
             }
             totalCurrentAccomCost += accomCost;
             // reset:
             accomCost = 0.00;
         }
+        LOGGER.log(Level.INFO, "Total current accomodation cost is ${0} ", totalCurrentAccomCost);
     }
     
     public synchronized void computeTotalCost() {
         totalCost = 0.00;
+        LOGGER.log(Level.INFO, "computeTotalCost(): totalCurrentAccomCost is -> ${0}", totalCurrentAccomCost);
         totalCost = totalCurrentAccomCost + (cost * (double) selectedCourses.size());
     }
     
-    // MUTATORS:
+    public Boolean getHotel() {
+        return hotel;
+    }
+    
+    public Boolean getParking() {
+        return parking;
+    }
     
     public synchronized double getCost() {
         return cost;

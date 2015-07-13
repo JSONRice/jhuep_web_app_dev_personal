@@ -69,9 +69,13 @@
 
                 <fieldset id="additionaloptions">
                     <legend>Additional Fees and Charges</legend>
-                    <input type="checkbox" name="accomodations" value="Hotel Accomodation">Hotel Accommodation (Conference Guest Special Fee - Parking Included)
+                    <input type="checkbox" 
+                           name="hotelaccomodation" value="Hotel Accomodation"
+                           ${computeCostBean.hotel == true ? 'checked' : ''}>Hotel Accommodation (Conference Guest Special Fee - Parking Included)
                     <br/>
-                    <input type="checkbox" name="accomodations" value="Parking Permit">Parking Permit
+                    <input type="checkbox" 
+                           name="parkingaccomodation" value="Parking Permit"
+                           ${computeCostBean.parking == true ? 'checked' : ''}>Parking Permit
                     <br/>
                 </fieldset>	
 
@@ -79,16 +83,20 @@
                     <legend>Employment Status</legend>
                     <ul>
                         <li>
-                            <input type="radio" name="user_type" value="JHU Employee" ${computeCostBean.status == "JHU Employee" ? 'checked' : ''}>JHU Employee
+                            <input type="radio" name="user_type" value="JHU Employee" 
+                                   ${computeCostBean.status == "JHU Employee" ? 'checked' : ''}>JHU Employee
                         </li>
                         <li>
-                            <input type="radio" name="user_type" value="JHU Student" ${computeCostBean.status == "JHU Student" ? 'checked' : ''}>JHU Student
+                            <input type="radio" name="user_type" value="JHU Student" 
+                                   ${computeCostBean.status == "JHU Student" ? 'checked' : ''}>JHU Student
                         </li>
                         <li>
-                            <input type="radio" name="user_type" value="Speaker" ${computeCostBean.status == "Speaker" ? 'checked' : ''}>Speaker
+                            <input type="radio" name="user_type" value="Speaker" 
+                                   ${computeCostBean.status == "Speaker" ? 'checked' : ''}>Speaker
                         </li>
                         <li>
-                            <input type="radio" name="user_type" value="Other" ${computeCostBean.status == "Other" ? 'checked' : ''}>Other
+                            <input type="radio" name="user_type" value="Other" 
+                                   ${computeCostBean.status == "Other" ? 'checked' : ''}>Other
                         </li>					
                     </ul>
                 </fieldset>
