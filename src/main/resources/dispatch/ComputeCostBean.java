@@ -3,6 +3,7 @@ package resources.dispatch;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ComputeCostBean {
 
+    private final static Logger LOGGER = Logger.getLogger(ComputeCostBean.class.getName());
+
     // MEMBERS:
     
     private double cost;
@@ -26,19 +29,40 @@ public class ComputeCostBean {
     private String name;
     private String status;
     private String email;
-    private ArrayList<String> courses;
+    private ArrayList<String> selectedCourses;
+    private final String[] courseNames = {
+                                    "A1 - J2EE Design Patterns", 
+                                    "A2 - Enterprise Service Bus", 
+                                    "A3 - Service Oriented Architecture", 
+                                    "A4 - Web Services",                                     
+                                    "A5 - Web Services Security",
+                                    "A6 - Secure Messaging"
+                                   };
+    private ArrayList<String> selectedCoursesState;
+
+    public ArrayList<String> getSelectedCoursesState() {
+        return selectedCoursesState;
+    }
+   
     private HashMap<String, Double> accomodationCostPairs;
-    
-    private final static Logger LOGGER = Logger.getLogger(ComputeCostBean.class.getName()); 
-    
+      
     // ACCESSORS:
 
     public ComputeCostBean() {
         cost = totalCost = totalCurrentAccomCost = 0.00;
         name = "";
         email = "";
-        courses = new ArrayList<String>();
-        accomodationCostPairs = new HashMap<String, Double>();
+        
+        // 6 courses:
+        selectedCoursesState = new ArrayList<>(6);
+        selectedCoursesState.add("");
+        selectedCoursesState.add("");
+        selectedCoursesState.add("");
+        selectedCoursesState.add("");
+        selectedCoursesState.add("");
+        selectedCoursesState.add("");           
+        selectedCourses = new ArrayList<>();
+        accomodationCostPairs = new HashMap<>();
     }
     
     public synchronized void setName(String n) {
@@ -73,17 +97,41 @@ public class ComputeCostBean {
         }
     }
 
-    public synchronized void setCourses(String[] myCourses)
+    public synchronized void setSelectedCourses(String[] myCourses)
             throws NullPointerException {
         // reset (remove) any old fields in case any where selected:
-        courses.clear();
         if (myCourses == null){
+            LOGGER.log(Level.WARNING, "No courses where selected. Array is null.");                                  
             throw new NullPointerException("No Courses Where Selected");            
         }
-        courses.addAll(Arrays.asList(myCourses));
-        if (courses.isEmpty()) {
+        LOGGER.log(Level.INFO, "Courses selected are: {0}", Arrays.toString(myCourses));
+        selectedCourses.addAll(Arrays.asList(myCourses));
+        LOGGER.log(Level.INFO, "Added the following to the selected courses list: {0}", selectedCourses.toString());
+        if (selectedCourses.isEmpty()) {
+            LOGGER.log(Level.WARNING, "No courses where selected. Array is empty.");                                              
             throw new NullPointerException("No Courses Where Selected");
         }
+
+        // Clear all the states first:
+        for (int i = 0; i < selectedCoursesState.size(); i++) {
+            selectedCoursesState.set(i, "");
+        }
+        
+        // Now that we know what courses the user desires to attend set their states:
+        int i = 0;
+        LOGGER.log(Level.INFO, "The list of known courses to compare against is: {0}", Arrays.toString(courseNames));
+        
+        int index = -1;
+        for (String str : selectedCourses) {
+            
+            if ((index = Arrays.asList(courseNames).indexOf(str)) >= 0) {
+                LOGGER.log(Level.INFO, "Setting 'selected' state for index: {0} course name -> {1}", 
+                        new Object[]{index, courseNames[index]});                                      
+                selectedCoursesState.set(index, "selected");
+            }
+            index = -1;
+            i++;
+        }        
     }
 
     public synchronized void setAccomodations(String[] accomodations) {
@@ -113,7 +161,7 @@ public class ComputeCostBean {
     
     public synchronized void computeTotalCost() {
         totalCost = 0.00;
-        totalCost = totalCurrentAccomCost + (cost * (double) courses.size());
+        totalCost = totalCurrentAccomCost + (cost * (double) selectedCourses.size());
     }
     
     // MUTATORS:
@@ -142,8 +190,8 @@ public class ComputeCostBean {
         return email;
     }
 
-    public synchronized ArrayList<String> getCourses() {
-        return courses;
+    public synchronized ArrayList<String> getSelectedCourses() {
+        return selectedCourses;
     }
 
     public synchronized HashMap<String, Double> getAccomodationCostPairs() {

@@ -44,7 +44,7 @@
                         <th>Cost</th>
                     </tr>
                     <%
-                        ArrayList<String> selectedCourses = computeCostBean.getCourses();
+                        ArrayList<String> selectedCourses = computeCostBean.getSelectedCourses();
                         int numCourses = selectedCourses.size();
                         for (String course : selectedCourses) {
                     %>

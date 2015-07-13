@@ -45,13 +45,20 @@ public class ComputeCostController extends HttpServlet {
         // with a defined error message (e.g. no courses selected):
         try {
             // Set all the attribute properties into the bean:
+            LOGGER.log(Level.INFO, "Name set in controller.");                    
             computeCostBean.setName(request.getParameter("name"));
+            LOGGER.log(Level.INFO, "Email set in controller.");                    
             computeCostBean.setEmail(request.getParameter("email"));
-            computeCostBean.setCourses(request.getParameterValues("courses"));
+            computeCostBean.setSelectedCourses(request.getParameterValues("courses"));
+            LOGGER.log(Level.INFO, "Courses set in controller.");                                
             computeCostBean.setAccomodations(request.getParameterValues("accomodations"));
+            LOGGER.log(Level.INFO, "Accomodations set in controller.");                                
             computeCostBean.setStatus(request.getParameter("user_type"));
+            LOGGER.log(Level.INFO, "Employment status set in controller.");                                            
             computeCostBean.setCost(request.getParameter("user_type"));
+            LOGGER.log(Level.INFO, "Cost set in controller.");                    
             computeCostBean.computeTotalCost();
+            LOGGER.log(Level.INFO, "Total cost compute in controller.");                    
 
             /*
             formValidationBean.checkFields((String) session.getAttribute("name"), 
