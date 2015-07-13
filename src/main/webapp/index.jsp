@@ -63,11 +63,6 @@
                         <option value="A5 - Web Services Security" id="A5" <%= a5 %>>A5 - Web Services Security</option>			                        
                         <option value="A6 - Secure Messaging" id="A6" <%= a6 %>>A6 - Secure Messaging</option>
                     </select>
-                    <select name="courses" id="courses" multiple>
-                        <c:forEach items="${sessionScope.pNames}" var="current" >
-                            <option value="${current.c1}" >${current.c2}</option>
-                        </c:forEach>
-                    </select>
                     <br/>
                     <span id="select_instructions">Hold down the Ctrl (Windows-Linux) / Command (Mac) button to select multiple courses.</span>
                 </fieldset>
