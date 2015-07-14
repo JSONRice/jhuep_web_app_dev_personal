@@ -37,57 +37,63 @@
             Your e-mail confirmation will be sent to: <span class="email">${computeCostBean.email}</span>
             <br/>
             <br/>
-            <form name="results" id="confirmation" action="ConfirmationController" method="post">
-                <table class="grid">
-                    <tr>
-                        <th>Your Courses</th>
-                        <th>Cost</th>
-                    </tr>
-                    <%
-                        ArrayList<String> selectedCourses = computeCostBean.getSelectedCourses();
-                        int numCourses = selectedCourses.size();
-                        for (String course : selectedCourses) {
-                    %>
-                    <tr>
-                        <td class="grid-border"><%= course %></td>
-                        <td class="grid-border cost"><%= String.format("%.2f", cost)%></td>
-                        <td class="grid-border remove"><input type="button" id="remove" value="Remove"></td>
-                    </tr>
-                    <%
-                        }
-                    %>
-                    <!-- Insert an empty row to provide spacing between courses and accomodations: -->
-                    <tr class="empty-row"/>
-                    <%
-                        HashMap<String, Double> accomodationCostPairs = computeCostBean.getAccomodationCostPairs();
-                        double totalCurrentAccomCost = 0.00;
-                        if (accomodationCostPairs != null) {
-                            Iterator itr = accomodationCostPairs.entrySet().iterator();
-                            while (itr.hasNext()) {
-                                Map.Entry pair = (Map.Entry) itr.next();
+            <table class="grid">
+                <tr>
+                    <th>Your Courses</th>
+                    <th>Cost</th>
+                </tr>
+                <%
+                    ArrayList<String> selectedCourses = computeCostBean.getSelectedCourses();
+                    int numCourses = selectedCourses.size();
+                    for (int i = 0; i < numCourses; i++) {
+                %>
+                <tr>
+                    <td class="grid-border"><%= selectedCourses.get(i)%></td>
+                    <td class="grid-border cost"><%= String.format("%.2f", cost)%></td>
+                    <td class="grid-border remove">
+                        <form action="ComputeCostController" method="post">
+                            <input type="hidden" name="course" value="<%= selectedCourses.get(i)%>" />
+                            <input type="submit" id="remove" value="Remove" name="remove">
+                        </form>
+                    </td>
+                </tr>                    
+                <%
+                    }
+                %>
+                <!-- Insert an empty row to provide spacing between courses and accomodations: -->
+                <tr class="empty-row"/>
+                <%
+                    HashMap<String, Double> accomodationCostPairs = computeCostBean.getAccomodationCostPairs();
+                    double totalCurrentAccomCost = 0.00;
+                    if (accomodationCostPairs != null) {
+                        Iterator itr = accomodationCostPairs.entrySet().iterator();
+                        while (itr.hasNext()) {
+                            Map.Entry pair = (Map.Entry) itr.next();
 
-                                String accomodation = (String) pair.getKey();
-                                Double currentAccomCost = (Double) pair.getValue();
+                            String accomodation = (String) pair.getKey();
+                            Double currentAccomCost = (Double) pair.getValue();
 
-                                itr.remove(); // avoids a ConcurrentModificationException
-                    %>
-                    <tr>
-                        <td class="accomodation"><%= accomodation %></td>
-                        <td class="cost"><%= String.format("%.2f", currentAccomCost)%></td>
-                    </tr>
-                    <%
-                           }
+                            itr.remove(); // avoids a ConcurrentModificationException
+%>
+                <tr>
+                    <td class="accomodation"><%= accomodation%></td>
+                    <td class="cost"><%= String.format("%.2f", currentAccomCost)%></td>
+                </tr>
+                <%
                         }
-                        Double totalCost = computeCostBean.getTotalCost();
-                    %>
-                    <tr>
-                        <td><hr style="color:black"/><td>
-                    </tr>
-                    <tr>
-                        <th>Total</th><td class="cost total-cost" id="total"><%= String.format("%.2f", totalCost)%></td>
-                    </tr>
-                    <tr>
-                        <td class="action-buttons">
+                    }
+                    Double totalCost = computeCostBean.getTotalCost();
+                %>
+                <tr>
+                    <td><hr style="color:black"/><td>
+                </tr>
+                <tr>
+                    <th>Total</th><td class="cost total-cost" id="total"><%= String.format("%.2f", totalCost)%></td>
+                </tr>
+                <tr>
+                    <td class="action-buttons">
+                        <form name="results" id="confirmation" action="ConfirmationController" method="post">
+
                             <input type="button" id="edit" onclick="window.location = 'index.jsp'" value="Edit Information">
                             <!-- 
                                  As the homework describes: Clicking on "Add More Courses" should take the user back to the course selection page. 
@@ -96,10 +102,11 @@
                             <input type="button" id="add" onclick="window.location = 'logout.jsp'" value="Add More Courses"> 
                             <!-- Submit will redirect to the confirmation.jsp page -->
                             <input type="submit" id="confirm" value="Confirm Registration">
-                        </td>                    
-                    </tr>
-                </table>
-            </form>
+                        </form>
+
+                    </td>                    
+                </tr>
+            </table>
         </div>
     </body>
 </html>

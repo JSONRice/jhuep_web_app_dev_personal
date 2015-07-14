@@ -126,23 +126,30 @@ public class ComputeCostBean {
         }
     }
 
-    public synchronized void setSelectedCourses(String[] myCourses)
-            throws NullPointerException {
+    public synchronized void setSelectedCourses(String[] myCourses) {
         // reset (remove) any old fields in case any where selected:
         if (myCourses == null){
-            LOGGER.log(Level.WARNING, "No courses where selected. Array is null.");                                  
-            throw new NullPointerException("No Courses Where Selected");            
+            LOGGER.log(Level.WARNING, "Courses list is null.");                                                          
+            selectedCoursesState.clear();
+            return;
         }
+        
+        // clear the list first:
+        selectedCourses.clear();
+        
         LOGGER.log(Level.INFO, "Courses selected are: {0}", Arrays.toString(myCourses));
         selectedCourses.addAll(Arrays.asList(myCourses));
         LOGGER.log(Level.INFO, "Added the following to the selected courses list: {0}", selectedCourses.toString());
         if (selectedCourses.isEmpty()) {
-            LOGGER.log(Level.WARNING, "No courses where selected. Array is empty.");                                              
-            throw new NullPointerException("No Courses Where Selected");
+            LOGGER.log(Level.WARNING, "No courses in list. Array is empty.");                                              
+            // reset states:
+            selectedCoursesState.clear();            
+            return;
         }
 
         // Clear all the states first:
         for (int i = 0; i < selectedCoursesState.size(); i++) {
+            // reset states:
             selectedCoursesState.set(i, "");
         }
         

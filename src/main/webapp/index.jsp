@@ -35,7 +35,6 @@
         <link href="css/oform.css" rel="stylesheet" type="text/css" />
         <link href="css/hw.css" rel="stylesheet" type="text/css" />
         <script src="js/jquery.js" type="text/javascript"></script>
-        <script src="js/indexErrorHandler.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
     </head>
     <body>
@@ -46,16 +45,16 @@
                     <legend>Contact Information</legend>
                     <label for="name">Name</label> 
                     <input type="text" name="name" 
-                           value="${computeCostBean.name}" autofocus>
+                           value="${computeCostBean.name}" autofocus required>
                     <br/>
                     <label for="email">E-Mail</label>
                     <input type="email" name="email" 
                            value="${computeCostBean.email}"
-                           title="Format must be: someuser@host.dom"> 
+                           title="Format must be: someuser@host.dom" required> 
                 </fieldset>
                 <fieldset id="courseselections">
                     <legend>Select Your Courses</legend>
-                    <select name="courses" id="courses" multiple>
+                    <select name="courses" id="courses" multiple required>
                         <option value="A1 - J2EE Design Patterns" id="A1" <%= a1 %>>A1 - J2EE Design Patterns</option>
                         <option value="A2 - Enterprise Service Bus" id="A2" <%= a2 %>>A2 - Enterprise Service Bus</option>
                         <option value="A3 - Service Oriented Architecture" id="A3" <%= a3 %>>A3 - Service Oriented Architecture</option> 
@@ -84,23 +83,23 @@
                     <ul>
                         <li>
                             <input type="radio" name="user_type" value="JHU Employee" 
-                                   ${computeCostBean.status == "JHU Employee" ? 'checked' : ''}>JHU Employee
+                                   ${computeCostBean.status == "JHU Employee" ? 'checked' : ''} required>JHU Employee
                         </li>
                         <li>
                             <input type="radio" name="user_type" value="JHU Student" 
-                                   ${computeCostBean.status == "JHU Student" ? 'checked' : ''}>JHU Student
+                                   ${computeCostBean.status == "JHU Student" ? 'checked' : ''} required>JHU Student
                         </li>
                         <li>
                             <input type="radio" name="user_type" value="Speaker" 
-                                   ${computeCostBean.status == "Speaker" ? 'checked' : ''}>Speaker
+                                   ${computeCostBean.status == "Speaker" ? 'checked' : ''} required>Speaker
                         </li>
                         <li>
                             <input type="radio" name="user_type" value="Other" 
-                                   ${computeCostBean.status == "Other" ? 'checked' : ''}>Other
+                                   ${computeCostBean.status == "Other" ? 'checked' : ''} required>Other
                         </li>					
                     </ul>
                 </fieldset>
-                <input type="submit" id="submission" value="Compute Seminar Cost">
+                <input type="submit" id="submission" name="computeCost" value="Compute Seminar Cost">
             </form>
         </div>
     </body>
