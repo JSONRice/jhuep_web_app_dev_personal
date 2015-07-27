@@ -32,7 +32,7 @@ public class ConfirmationController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         LOGGER.log(Level.INFO, "Routing from results.jsp to confirmation.jsp");        
         RequestDispatcher confirmationDispatcher
-                = getServletConfig().getServletContext().getRequestDispatcher("/confirmation.jsp");
+                = getServletConfig().getServletContext().getRequestDispatcher("/module7/confirmation.jsp");
         confirmationDispatcher.forward(request, response);
     }
 
