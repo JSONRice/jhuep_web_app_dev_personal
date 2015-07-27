@@ -93,7 +93,7 @@ public class ComputeCostController extends HttpServlet {
                     // Else if no errors store our updated bean and dispatch (route) to the results page:
                     session.setAttribute("computeCostBean", computeCostBean);
                     RequestDispatcher resultsDispatcher
-                            = getServletConfig().getServletContext().getRequestDispatcher("/module7/index.jsp");
+                            = getServletConfig().getServletContext().getRequestDispatcher("/index.jsp");
                     resultsDispatcher.forward(request, response);
                 }
                 return; // -- preempt
@@ -104,7 +104,7 @@ public class ComputeCostController extends HttpServlet {
             // Else if no errors store our updated bean and dispatch (route) to the results page:
             session.setAttribute("computeCostBean", computeCostBean);
             RequestDispatcher resultsDispatcher
-                    = getServletConfig().getServletContext().getRequestDispatcher("/module7/results.jsp");
+                    = getServletConfig().getServletContext().getRequestDispatcher("/results.jsp");
             resultsDispatcher.forward(request, response);
         }
     }
