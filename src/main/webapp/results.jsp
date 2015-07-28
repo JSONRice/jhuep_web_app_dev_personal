@@ -13,7 +13,9 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="computeCostBean" class="resources.dispatch.ComputeCostBean" scope="session"/>
 <jsp:setProperty name="computeCostBean" property="*" />
-
+<%
+   session.setAttribute( "computeCostBean", computeCostBean);
+%>
 <!DOCTYPE html>
 <html>
     <head>

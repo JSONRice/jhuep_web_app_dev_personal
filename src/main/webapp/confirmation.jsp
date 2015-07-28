@@ -23,6 +23,7 @@
         <div id="pageContent" class="content">   
             <hr/>
             <h1><%= emailstatus %></h1>
+            <br/>
             <h1>Registration Process completed for <i>${computeCostBean.name}</i>. Thank you.</h1>
             <hr/>
         </div>

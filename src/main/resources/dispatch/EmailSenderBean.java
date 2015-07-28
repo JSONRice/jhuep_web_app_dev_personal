@@ -23,7 +23,7 @@ public class EmailSenderBean
 {
     private static final Logger LOGGER = Logger.getLogger(EmailSenderBean.class.getName());
     // Send the email from the Team D NEWHORIZONS account:
-    private static final String ADDRESS = "NewHorizonsTeamD@gmail.com";
+    public static final String ADDRESS = "NewHorizonsTeamD@gmail.com";
     private static final String PASSWD = "newhorizons";    
     
     public static void sendMail(String to, String from, String subject, String body,

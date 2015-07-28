@@ -86,6 +86,9 @@ public class ComputeCostController extends HttpServlet {
                 LOGGER.log(Level.INFO, "Course listing before remove: {0}", selectedCourses.toString());
                 computeCostBean.setSelectedCourses(courses);
                 LOGGER.log(Level.INFO, "Course listing after remove: {0}", computeCostBean.getSelectedCourses().toString());
+                
+                // update the total cost:
+                computeCostBean.computeTotalCost();
             }
             // If the user removed their last course then automatically route to index.jsp:
             if (computeCostBean.getSelectedCourses().size() <= 0) {
