@@ -22,7 +22,6 @@ import resources.dispatch.EmailSenderBean;
 public class ConfirmationController extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(ConfirmationController.class.getName());
-    private static final String SENDTO = "jhuep605782@gmail.com";
     private ComputeCostBean computeCostBean;
     private HttpSession session;
 
@@ -69,11 +68,12 @@ public class ConfirmationController extends HttpServlet {
                  * known address. This is important because the grader will need to access our account
                  * with the given passwd to verify the logic.
                  ***/
-                EmailSenderBean.sendMail(SENDTO, 
-                                    SENDTO, "JHU Conference Registration", 
+                String sendto = computeCostBean.getEmail();
+                EmailSenderBean.sendMail(sendto, 
+                                    sendto, "JHU Conference Registration", 
                                     emailmsg, 
                                     false);
-                emailstatus = "Email sent.";
+                emailstatus = "Email sent to " + sendto;
             }
             catch (MessagingException e) {
                 LOGGER.log(Level.SEVERE, "\nSending email failed:\n");

@@ -106,9 +106,12 @@ public class ComputeCostController extends HttpServlet {
         if (!response.isCommitted()) {
             // Else if no errors store our updated bean and dispatch (route) to the results page:
             session.setAttribute("computeCostBean", computeCostBean);
+        /*
             RequestDispatcher resultsDispatcher
-                    = getServletConfig().getServletContext().getRequestDispatcher("/results.jsp");
+                    = getServletConfig().getServletContext().getRequestDispatcher("/checkout.jsp");
             resultsDispatcher.forward(request, response);
+        */
+            response.sendRedirect(response.encodeRedirectURL("/checkout.jsp"));
         }
     }
 

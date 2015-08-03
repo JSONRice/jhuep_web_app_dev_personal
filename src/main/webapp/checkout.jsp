@@ -1,7 +1,7 @@
 <%-- 
-    Document    : results
-    Description : results from the form
-    Created on  : Jun 11, 2015, 11:10:20 PM
+    Document    : checkout
+    Description : results and checkout page
+    Created on  : Aug 2, 2015, 5:39:12 PM
     Author      : jsnrice
 --%>
 
@@ -14,15 +14,26 @@
 <jsp:useBean id="computeCostBean" class="resources.dispatch.ComputeCostBean" scope="session"/>
 <jsp:setProperty name="computeCostBean" property="*" />
 <%
-   session.setAttribute( "computeCostBean", computeCostBean);
+    session.setAttribute("computeCostBean", computeCostBean);
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>JHU Annual Software Development Seminar - Compute Cost</title>
+        <title>JHU Annual Software Development Seminar - Checkout</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">        
         <link href="css/standard.css" rel="stylesheet" type="text/css" />
         <link href="css/oform.css" rel="stylesheet" type="text/css" />
         <link href="css/hw.css" rel="stylesheet" type="text/css" />
+        <script src="js/jquery.js" type="text/javascript"></script>
+        <script src="js/jquery-ui/datepicker.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#datepicker").datepicker({
+                    dateFormat: 'yymmdd'
+
+                });
+            });
+        </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
@@ -93,6 +104,32 @@
                     <th>Total</th><td class="cost total-cost" id="total"><%= String.format("%.2f", totalCost)%></td>
                 </tr>
                 <tr>
+                    <td>
+                        <fieldset>
+                            <legend>Payment Details</legend>
+                            Credit Card Type
+                            <ul>
+                                <li>
+                                    <input type="radio" name="cc_type" value="Visa" required>Visa
+                                </li>
+                                <li>
+                                    <input type="radio" name="cc_type" value="Master Card" required>Master Card
+                                </li>
+                                <li>
+                                    <input type="radio" name="cc_type" value="Discover" required>Discover
+                                </li>
+                            </ul>
+                            <label for="cc">Credit Card Number</label>
+                            <input type="text" name="cc" pattern="[0-9]{13,16}" title="Please enter a 13-16 digit credit card number." required/>
+                            <br/>                            
+                            <br/>
+                            <label for="cc">Credit Card Expiration Date</label>
+                            <input type="text" id="datepicker" name="date" required/>                            
+                            <br/>
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr>
                     <td class="action-buttons">
                         <form name="results" id="confirmation" action="confirmation" method="post">
 
@@ -105,7 +142,6 @@
                             <!-- Submit will redirect to the confirmation.jsp page -->
                             <input type="submit" id="confirm" value="Confirm Registration">
                         </form>
-
                     </td>                    
                 </tr>
             </table>

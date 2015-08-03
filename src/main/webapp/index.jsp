@@ -40,7 +40,7 @@
     <body>
         <%@ include file="banner.jsp" %>
         <div id="pageContent" class="content">
-            <form name="order" id="signup" action="ComputeCostController" method="post">
+            <form name="order" id="signup" action="cost" method="post">
                 <fieldset id="contactinfo">
                     <legend>Contact Information</legend>
                     <label for="name">Name</label> 

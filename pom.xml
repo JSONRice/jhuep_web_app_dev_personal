@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>module9</groupId>
-  <artifactId>module9</artifactId>
+  <groupId>module10</groupId>
+  <artifactId>module10</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
 
-  <name>module9</name>
+  <name>module10</name>
   <url>http://maven.apache.org</url>
 
   <properties>
