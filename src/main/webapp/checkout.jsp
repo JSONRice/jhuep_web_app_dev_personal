@@ -87,7 +87,7 @@
                             Double currentAccomCost = (Double) pair.getValue();
 
                             itr.remove(); // avoids a ConcurrentModificationException
-%>
+                %>
                 <tr>
                     <td class="accomodation"><%= accomodation%></td>
                     <td class="cost"><%= String.format("%.2f", currentAccomCost)%></td>
@@ -103,35 +103,35 @@
                 <tr>
                     <th>Total</th><td class="cost total-cost" id="total"><%= String.format("%.2f", totalCost)%></td>
                 </tr>
-                <tr>
-                    <td>
-                        <fieldset>
-                            <legend>Payment Details</legend>
-                            Credit Card Type
-                            <ul>
-                                <li>
-                                    <input type="radio" name="cc_type" value="Visa" required>Visa
-                                </li>
-                                <li>
-                                    <input type="radio" name="cc_type" value="Master Card" required>Master Card
-                                </li>
-                                <li>
-                                    <input type="radio" name="cc_type" value="Discover" required>Discover
-                                </li>
-                            </ul>
-                            <label for="cc">Credit Card Number</label>
-                            <input type="text" name="cc" pattern="[0-9]{13,16}" title="Please enter a 13-16 digit credit card number." required/>
-                            <br/>                            
-                            <br/>
-                            <label for="cc">Credit Card Expiration Date</label>
-                            <input type="text" id="datepicker" name="date" required/>                            
-                            <br/>
-                        </fieldset>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="action-buttons">
-                        <form name="results" id="confirmation" action="confirmation" method="post">
+                <form name="results" id="confirmation" action="confirmation" method="post">
+                    <tr>
+                        <td>
+                            <fieldset>
+                                <legend>Payment Details</legend>
+                                Credit Card Type
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="cc_type" value="Visa" required>Visa
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="cc_type" value="Master Card" required>Master Card
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="cc_type" value="Discover" required>Discover
+                                    </li>
+                                </ul>
+                                <label for="cc">Credit Card Number</label>
+                                <input type="text" name="cc" pattern="[0-9]{13,16}" title="Please enter a 13-16 digit credit card number." required/>
+                                <br/>                            
+                                <br/>
+                                <label for="cc">Credit Card Expiration Date</label>
+                                <input type="text" id="datepicker" name="date" required/>                            
+                                <br/>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="action-buttons">
 
                             <input type="button" id="edit" onclick="window.location = 'index.jsp'" value="Edit Information">
                             <!-- 
@@ -141,9 +141,10 @@
                             <input type="button" id="add" onclick="window.location = 'logout.jsp'" value="Add More Courses"> 
                             <!-- Submit will redirect to the confirmation.jsp page -->
                             <input type="submit" id="confirm" value="Confirm Registration">
-                        </form>
-                    </td>                    
-                </tr>
+                        </td>                    
+                    </tr>
+                </form>
+
             </table>
         </div>
     </body>
