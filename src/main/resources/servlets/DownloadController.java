@@ -11,6 +11,10 @@ import java.io.*;
 import com.lowagie.text.*;
 import com.lowagie.text.html.simpleparser.HTMLWorker;
 import com.lowagie.text.pdf.*;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 /**
  * @description Servlet for downloading file attachements.
@@ -39,6 +43,7 @@ public class DownloadController extends HttpServlet {
                 downloadAsPDF(request, response);
             } else if (request.getParameter("downloadexcel") != null) {
                 LOGGER.log(Level.INFO, "Downloading form as Excel file.");
+                downloadAsExcel(request, response);
             } else {
                 LOGGER.log(Level.WARNING, "Warning, did not receive request for PDF or Excel download. Something went wrong.");
             }
@@ -47,6 +52,95 @@ public class DownloadController extends HttpServlet {
         }
     }
 
+    /**
+     * @description Obtain the form content and transpose into a byte stream
+     * that is then recorded to a Excel (XLS) file.
+     * @param request
+     * @param response
+     * @throws DocumentException
+     * @throws IOException
+     */    
+    public void downloadAsExcel(HttpServletRequest request, HttpServletResponse response)
+            throws DocumentException, IOException {
+
+        // create a small spreadsheet
+        HSSFWorkbook wb = new HSSFWorkbook();
+        HSSFSheet sheet = wb.createSheet();
+
+        System.out.println("\n\nBefore For xls Loop");
+
+        String name = request.getParameter("name");
+        String status = request.getParameter("status");
+        String total = request.getParameter("total");
+        String cost = request.getParameter("cost");        
+        String[] courses = request.getParameterValues("courses");
+        String[] accomodations = request.getParameterValues("accomodations");
+        String[] accomodationCosts = request.getParameterValues("accomodationCosts");
+        
+        int i;
+        for (i = 0; i < courses.length; i++) {
+            HSSFRow row = sheet.createRow(i);
+            String course = courses[i];
+            HSSFCell cellOne = row.createCell(0);
+            HSSFCell cellTwo = row.createCell(1);
+            cellOne.setCellValue(course);        
+            cellTwo.setCellValue("$" + cost);
+        }
+        
+        i += 1;
+        for (int j = 0; j < accomodations.length; j++, i++) {
+            HSSFRow row = sheet.createRow(i);
+            String accomodation = accomodations[j];
+            String accomodationCost = accomodationCosts[j];
+            HSSFCell cellOne = row.createCell(0);
+            HSSFCell cellTwo = row.createCell(1);               
+            cellOne.setCellValue(accomodation);
+            cellTwo.setCellValue("$" + accomodationCost);
+        }
+        
+        // Total cost:        
+        i = insertRow(1+i, wb, sheet, "Total Cost:", "$" + total);
+        
+        // User info:
+        i = insertRow(1 + i, wb, sheet, "Name:", name);
+        i = insertRow(i, wb, sheet, "Employment Status:", status);
+        i = insertRow(i, wb, sheet, "Registration:", "Confirmed");
+
+        // Write byte stream to ms-excel:
+        ByteArrayOutputStream outByteStream = new ByteArrayOutputStream();
+        wb.write(outByteStream);
+        byte[] outArray = outByteStream.toByteArray();
+        response.setContentType("application/ms-excel");
+        response.setContentLength(outArray.length);
+        response.setHeader("Expires:", "0"); // eliminates browser caching
+        response.setHeader("Content-Disposition", "attachment; filename=confirmationxls.xls");
+        response.getOutputStream().write(outArray);
+        response.getOutputStream().flush();
+    }
+
+    /**
+     * @description Given a row index (i) insert a key value pair into an Excel spreadsheet.
+     * @param i
+     * @param wb
+     * @param sheet
+     * @param firstcellcon
+     * @param secondcellcon
+     * @return 
+     */
+    public int insertRow(int i, HSSFWorkbook wb, HSSFSheet sheet, String firstcellcon, String secondcellcon)
+    {
+        HSSFRow row = sheet.createRow(i);
+ 
+        HSSFCell cell = row.createCell(0);
+        cell.setCellValue(firstcellcon);
+            
+        HSSFCell cell1 = row.createCell(1);
+        cell1.setCellValue(secondcellcon); 
+        
+        return i+1;
+    }
+
+    
     /**
      * @description Obtain the form content and transpose into a byte stream
      * that is then recorded to a PDF.

@@ -134,7 +134,7 @@
                             %>
 
                             <input type="submit" name="downloadpdf" value="Download as PDF file">
-                            <input type="submit" name="downloadxls" value="Download as Excel file">
+                            <input type="submit" name="downloadexcel" value="Download as Excel file">
                         </form>                        
                     </td>                      
                 </tr>
