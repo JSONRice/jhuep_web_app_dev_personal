@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>module10</groupId>
-  <artifactId>module10</artifactId>
+  <groupId>module12</groupId>
+  <artifactId>module12</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
 
-  <name>module10</name>
+  <name>module12</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -35,13 +35,18 @@
       <version>7.0</version>
       <type>jar</type>
     </dependency>
-<!--
     <dependency>
-      <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
-      <version>7.0</version>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>3.9</version>
+      <type>jar</type>
     </dependency>
--->
+    <dependency>
+      <groupId>com.lowagie</groupId>
+      <artifactId>itext</artifactId>
+      <version>2.1.7</version>
+      <type>jar</type>
+    </dependency>
   </dependencies>
 
   <build>

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app id="WebApp_ID" version="3.0" 
-         xmlns="http://java.sun.com/xml/ns/javaee" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+<web-app id="WebApp_ID" version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <display-name>jhuep_web_app_dev_personal</display-name>
     <servlet>
         <servlet-name>ComputeCostController</servlet-name>
@@ -10,7 +7,11 @@
     </servlet>
     <servlet>
         <servlet-name>ConfirmationController</servlet-name>
-        <servlet-class>resources.servlets.ConfirmationController</servlet-class>                
+        <servlet-class>resources.servlets.ConfirmationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadController</servlet-name>
+        <servlet-class>resources.servlets.DownloadController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ComputeCostController</servlet-name>
@@ -18,12 +19,16 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ConfirmationController</servlet-name>
-        <url-pattern>/confirmation</url-pattern>        
+        <url-pattern>/confirmation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadController</servlet-name>
+        <url-pattern>/downloader</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>secure</web-resource-name>
-                <url-pattern>/checkout.jsp</url-pattern>
+            <url-pattern>/checkout.jsp</url-pattern>
         </web-resource-collection>
         <user-data-constraint>
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>

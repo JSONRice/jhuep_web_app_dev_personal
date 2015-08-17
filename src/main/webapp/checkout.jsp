@@ -77,6 +77,9 @@
                 <tr class="empty-row"/>
                 <%
                     HashMap<String, Double> accomodationCostPairs = computeCostBean.getAccomodationCostPairs();
+                    ArrayList<String> accomodations = new ArrayList<>();
+                    ArrayList<String> accomodationCosts = new ArrayList<>();
+
                     double totalCurrentAccomCost = 0.00;
                     if (accomodationCostPairs != null) {
                         Iterator itr = accomodationCostPairs.entrySet().iterator();
@@ -84,8 +87,9 @@
                             Map.Entry pair = (Map.Entry) itr.next();
 
                             String accomodation = (String) pair.getKey();
+                            accomodations.add(accomodation);
                             Double currentAccomCost = (Double) pair.getValue();
-
+                            accomodationCosts.add(String.format("%.2f", currentAccomCost));
                             itr.remove(); // avoids a ConcurrentModificationException
                 %>
                 <tr>
@@ -96,13 +100,45 @@
                         }
                     }
                     Double totalCost = computeCostBean.getTotalCost();
-                %>
+                    // name=${computeCostBean.name}&status=${computeCostBean.status}&total=<%= String.format("%.2f", totalCost)
+                    //&cost=<%= String.format("%.2f", cost)
+                   %>
                 <tr>
                     <td><hr style="color:black"/><td>
                 </tr>
                 <tr>
                     <th>Total</th><td class="cost total-cost" id="total"><%= String.format("%.2f", totalCost)%></td>
                 </tr>
+                <tr>
+                    <td class="action-buttons">
+                        <form name="downloader" id="downloader" action="downloader" method="get">
+                            <input type="hidden" name="name" id="name" value="${computeCostBean.name}" />                            
+                            <input type="hidden" name="total" id="total" value="<%= String.format("%.2f", totalCost)%>" />
+                            <input type="hidden" name="cost" id="cost" value="<%= String.format("%.2f", cost)%>" />
+                            <input type="hidden" name="status" id="status" value="${computeCostBean.status}" />
+                            <%
+                                // Populate courses:
+                                for (int i = 0; i < numCourses; i++) {
+                            %>
+                            <input type="hidden" name="courses" value="<%= selectedCourses.get(i)%>" />                            
+                            <%
+                                }
+                                int len = accomodations.size();
+                                // Populate accomodations with prices:
+                                for (int i = 0; i < len; i++) {
+                            %>
+                            <input type="hidden" name="accomodations" value="<%= accomodations.get(i)%>" />
+                            <input type="hidden" name="accomodationCosts" value="<%= accomodationCosts.get(i)%>" />
+                            <%
+                                }
+                            %>
+
+                            <input type="submit" name="downloadpdf" value="Download as PDF file">
+                            <input type="submit" name="downloadxls" value="Download as Excel file">
+                        </form>                        
+                    </td>                      
+                </tr>
+                <tr class="empty-row"></tr>
                 <form name="results" id="confirmation" action="confirmation" method="post">
                     <tr>
                         <td>
